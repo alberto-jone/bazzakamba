@@ -1,0 +1,7 @@
+{
+  "name": "Bazza Kamba Rides",
+  "description": "A full-featured ride-sharing application simulation with AI-powered feedback analysis.",
+  "requestFramePermissions": [
+    "geolocation"
+  ]
+}
