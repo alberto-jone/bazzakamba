@@ -5,8 +5,8 @@ import { User, PrototypeFeedback, DriverFeedback } from '../types';
 // 1. Crie um projeto em supabase.com
 // 2. Copie a URL e a ANON KEY para as variáveis abaixo.
 // 3. Crie as tabelas 'users', 'app_feedback', 'driver_feedback', 'stats'.
-const SUPABASE_URL = ''; 
-const SUPABASE_KEY = '';
+const SUPABASE_URL = 'https://sgepvykxaezscvnwyvdj.supabase.co'; 
+const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InNnZXB2eWt4YWV6c2N2bnd5dmRqIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjMzMDE1MzksImV4cCI6MjA3ODg3NzUzOX0.2tTtl0QZMgbf-TNlJ9PZBabgJT9BHnvD_gM-gpWfVZA';
 
 // @ts-ignore
 const supabase = (window.supabase && SUPABASE_URL && SUPABASE_KEY) 
