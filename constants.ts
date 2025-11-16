@@ -44,7 +44,7 @@ export const RIDE_OPTIONS: RideOption[] = [
 ];
 
 export const MOCK_DRIVER: Driver = {
-  name: 'Paulo "Bazza" Silva',
+  name: 'Paulo Silva',
   rating: 4.9,
   carModel: 'Toyota Corolla',
   carColor: 'Azul',
