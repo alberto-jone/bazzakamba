@@ -13,7 +13,7 @@ export const RIDE_OPTIONS: RideOption[] = [
   },
   {
     id: 'economy',
-    name: 'Economy Ride',
+    name: 'Econômico',
     price: 2000, // 2.000 Kz
     image: 'compact',
     eta: '4 min',
@@ -23,7 +23,7 @@ export const RIDE_OPTIONS: RideOption[] = [
   },
   {
     id: 'standard',
-    name: 'Standard Ride',
+    name: 'Conforto',
     price: 3500, // 3.500 Kz
     image: 'sedan',
     eta: '6 min',
@@ -33,7 +33,7 @@ export const RIDE_OPTIONS: RideOption[] = [
   },
   {
     id: 'luxury',
-    name: 'Luxury Ride',
+    name: 'Luxuoso',
     price: 7000, // 7.000 Kz
     image: 'suv',
     eta: '8 min',
@@ -50,7 +50,7 @@ export const MOCK_DRIVER: Driver = {
   carColor: 'Azul',
   plate: 'LD-22-44-GX',
   trips: 1240,
-  image: 'https://picsum.photos/id/64/200/200'
+  image: '/motorista.jpg'
 };
 
 // Simplified coordinate map for the Dande/Caxito/Panguila axis
