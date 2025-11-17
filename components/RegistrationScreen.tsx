@@ -71,7 +71,7 @@ export const RegistrationScreen: React.FC<RegistrationScreenProps> = ({ onRegist
           }`}
         >
           <KeyRound className="w-4 h-4" />
-          Admin / Motorista
+          Login
         </button>
       </div>
 
@@ -79,11 +79,11 @@ export const RegistrationScreen: React.FC<RegistrationScreenProps> = ({ onRegist
         
         {/* Header Logo */}
         <div className="flex flex-col items-center mb-8 mt-4">
-           <div className="mb-2">
-              {/* 
-                COLOQUE SUA IMAGEM AQUI:
-                <img src="/caminho/para/logo.png" alt="Bazza Kamba" className="h-12" />
-              */}
+           <div className="mb-2 d-flex">
+              {
+                // COLOQUE SUA IMAGEM AQUI:
+                <img src="/logo.jpg" alt="Bazza Kamba" className="h-8 text-center" />
+              }
               <h1 className="text-3xl font-black tracking-tighter text-[#007FF0]">
                 BAZZAKAMBA
               </h1>

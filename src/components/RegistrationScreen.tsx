@@ -71,7 +71,7 @@ export const RegistrationScreen: React.FC<RegistrationScreenProps> = ({ onRegist
           }`}
         >
           <KeyRound className="w-4 h-4" />
-          Admin / Motorista
+          Login
         </button>
       </div>
 

@@ -6,22 +6,22 @@ import { User, PrototypeFeedback, DriverFeedback, UserRole } from '../types';
 // 1. Crie um projeto em supabase.com
 // 2. Copie a URL e a ANON KEY para as variáveis abaixo.
 // 3. Crie as tabelas 'users', 'app_feedback', 'driver_feedback', 'stats'.
-const SUPABASE_URL = ''; 
-const SUPABASE_KEY = '';
+const SUPABASE_URL = 'https://sgepvykxaezscvnwyvdj.supabase.co';
+const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InNnZXB2eWt4YWV6c2N2bnd5dmRqIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjMzMDE1MzksImV4cCI6MjA3ODg3NzUzOX0.2tTtl0QZMgbf-TNlJ9PZBabgJT9BHnvD_gM-gpWfVZA';
 
 // @ts-ignore
-const supabase = (window.supabase && SUPABASE_URL && SUPABASE_KEY) 
-// @ts-ignore
-  ? window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY) 
+const supabase = (window.supabase && SUPABASE_URL && SUPABASE_KEY)
+  // @ts-ignore
+  ? window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY)
   : null;
 
 const DB_KEYS = {
   USERS: 'bk_users_v3', // Bump version to clear old data
-  CURRENT_USER: 'bk_current_user_session_v3', 
+  CURRENT_USER: 'bk_current_user_session_v3',
   STATS_SIMULATIONS: 'bk_stats_simulations_v3',
   FEEDBACK_APP: 'bk_feedback_app_v3',
   FEEDBACK_DRIVER: 'bk_feedback_driver_v3',
-  INIT_FLAG: 'bk_db_initialized_v4' 
+  INIT_FLAG: 'bk_db_initialized_v4'
 };
 
 // --- DADOS INICIAIS (APENAS ADMIN) ---
@@ -44,7 +44,7 @@ export const db = {
     const isInitialized = localStorage.getItem(DB_KEYS.INIT_FLAG);
     if (!isInitialized) {
       console.log("Inicializando Banco de Dados Local...");
-      
+
       // Seeding Admin apenas
       if (!localStorage.getItem(DB_KEYS.USERS)) {
         localStorage.setItem(DB_KEYS.USERS, JSON.stringify(SEED_USERS));
@@ -70,9 +70,9 @@ export const db = {
   // Autenticação com Senha
   authenticate: (identifier: string, passwordInput: string): User | null => {
     const users = db.getUsers();
-    
-    const user = users.find(u => 
-      (u.email.toLowerCase() === identifier.toLowerCase() || u.phone === identifier) && 
+
+    const user = users.find(u =>
+      (u.email.toLowerCase() === identifier.toLowerCase() || u.phone === identifier) &&
       (u.role === 'admin' || u.role === 'driver')
     );
 
@@ -95,11 +95,11 @@ export const db = {
   },
 
   // --- GESTÃO DE USUÁRIOS ---
-  
+
   // Cadastro de Passageiro (Sem senha, apenas ID básico)
   registerUser: (userData: Omit<User, 'id' | 'registeredAt' | 'role' | 'password'>) => {
     const users = db.getUsers();
-    
+
     // Verifica se já existe
     const existingUser = users.find(u => u.phone === userData.phone);
     if (existingUser) return existingUser;
@@ -107,7 +107,7 @@ export const db = {
     const newUser: User = {
       ...userData,
       id: Date.now().toString(),
-      role: 'passenger', 
+      role: 'passenger',
       registeredAt: new Date().toISOString()
     };
 
@@ -128,7 +128,7 @@ export const db = {
   // Cadastro de Motorista (Apenas Admin usa isso)
   registerDriver: (driverData: { name: string; email: string; phone: string; plate: string }) => {
     const users = db.getUsers();
-    
+
     if (users.find(u => u.email === driverData.email || u.phone === driverData.phone)) {
       throw new Error("Motorista já cadastrado com este email ou telefone.");
     }
@@ -181,7 +181,7 @@ export const db = {
       id: Date.now().toString(),
       submittedAt: new Date().toISOString()
     };
-    
+
     list.push(newItem);
     localStorage.setItem(DB_KEYS.FEEDBACK_APP, JSON.stringify(list));
 
@@ -231,43 +231,43 @@ export const db = {
       ['--- USUARIOS ---'],
       ['ID', 'Nome', 'Email', 'Telefone', 'Perfil', 'Matricula', 'Data Registro'],
       ...users.map(u => [
-        u.id, 
-        `"${u.name}"`, 
-        u.email, 
-        u.phone, 
-        u.role, 
-        u.plate || '-', 
+        u.id,
+        `"${u.name}"`,
+        u.email,
+        u.phone,
+        u.role,
+        u.plate || '-',
         u.registeredAt
       ]),
       [],
       ['--- FEEDBACK MOTORISTAS ---'],
       ['ID', 'Nota', 'Comentario', 'Sentimento', 'Data'],
       ...driverFeedback.map(df => [
-        df.id, 
-        df.rideRating.toString(), 
-        `"${(df.comment || '').replace(/"/g, '""')}"`, 
-        df.sentiment || '-', 
+        df.id,
+        df.rideRating.toString(),
+        `"${(df.comment || '').replace(/"/g, '""')}"`,
+        df.sentiment || '-',
         df.submittedAt
       ]),
       [],
       ['--- FEEDBACK APP ---'],
       ['ID', 'Nota', 'Comentario', 'Data'],
       ...appFeedback.map(af => [
-        af.id, 
-        af.rating.toString(), 
-        `"${(af.comment || '').replace(/"/g, '""')}"`, 
+        af.id,
+        af.rating.toString(),
+        `"${(af.comment || '').replace(/"/g, '""')}"`,
         af.submittedAt
       ])
     ];
 
-    const csvContent = "data:text/csv;charset=utf-8," 
-        + rows.map(e => e.join(",")).join("\n");
+    const csvContent = "data:text/csv;charset=utf-8,"
+      + rows.map(e => e.join(",")).join("\n");
 
     const encodedUri = encodeURI(csvContent);
     const link = document.createElement("a");
     link.setAttribute("href", encodedUri);
     link.setAttribute("download", `bazza_kamba_report_${new Date().getTime()}.csv`);
-    document.body.appendChild(link); 
+    document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
   }
