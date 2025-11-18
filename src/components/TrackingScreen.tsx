@@ -91,7 +91,7 @@ export const TrackingScreen: React.FC<TrackingScreenProps> = ({ selectedRide, on
       // 4. Traveling Phase (Longer: 12s)
       setStatus('traveling');
       setTimeDisplay('Em viagem');
-      setInfoText('Destino: Açucareira'); 
+      setInfoText('Destino: Açuca'); 
       
       await new Promise(r => setTimeout(r, 14000)); // 14 seconds trip
       if (!isMountedRef.current) return;
