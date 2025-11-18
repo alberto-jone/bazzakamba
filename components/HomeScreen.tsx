@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { MapPin, X, Menu, LayoutDashboard, FileDown, MessageSquare, LogOut, UserCircle, ShieldCheck, Car } from 'lucide-react';
 import { MapBackground } from './MapBackground';
@@ -36,6 +35,12 @@ export const HomeScreen: React.FC<HomeScreenProps> = ({
   const isDriver = user?.role === 'driver';
   const hasDashboardAccess = isAdmin || isDriver; // Apenas estes podem ver o dashboard
 
+  // NOVOS estados para o 2º input (origin)
+  const [origin, setOrigin] = useState('A tua Localização');
+  const [originSuggestions, setOriginSuggestions] = useState<string[]>([]);
+  const [isValidOriginSelection, setIsValidOriginSelection] = useState(false);
+  const [showOriginSuggestions, setShowOriginSuggestions] = useState(false);
+
   const handleSearch = (text: string) => {
     setDestination(text);
     setIsValidSelection(false);
@@ -52,10 +57,34 @@ export const HomeScreen: React.FC<HomeScreenProps> = ({
     }
   };
 
+  // Função de pesquisa PARA O 2º input — mesma lógica do handleSearch original
+  const handleSearchOrigin = (text: string) => {
+    setOrigin(text);
+    setIsValidOriginSelection(false);
+
+    if (text.length > 1) {
+      const matches = LANDMARKS.filter(l =>
+        l.name.toLowerCase().includes(text.toLowerCase())
+      ).map(l => l.name);
+      setOriginSuggestions(matches);
+      setShowOriginSuggestions(true);
+    } else {
+      setOriginSuggestions([]);
+      setShowOriginSuggestions(false);
+    }
+  };
+
   const selectSuggestion = (name: string) => {
     setDestination(name);
     setIsValidSelection(true);
     setShowSuggestions(false);
+  };
+
+  // Selecionar sugestão do 2º input — mesma estrutura do selectSuggestion
+  const selectOriginSuggestion = (name: string) => {
+    setOrigin(name);
+    setIsValidOriginSelection(true);
+    setShowOriginSuggestions(false);
   };
 
   const handleExportReport = () => {
@@ -171,10 +200,41 @@ export const HomeScreen: React.FC<HomeScreenProps> = ({
           {/* Substituindo bg-blue-500 e ring-blue-100 */}
           <div className="w-2 h-2 bg-[#007FF0] rounded-full ml-1 ring-4 ring-[#007FF0]/20"></div>
           <div className="flex-1">
-            <div className="text-[10px] text-gray-400 font-bold uppercase tracking-wider">Local Atual</div>
-            <div className="font-semibold text-sm text-gray-900">Cine Caxito</div>
+            <form action="">
+              <label htmlFor="LocalAtual" className="text-[10px] text-gray-400 font-bold uppercase tracking-wider">Local Atual</label>
+              <input
+                type="text"
+                name="localAtual"
+                value={origin}
+                id="LocalAtual"
+                title="Local Atual"
+                onChange={(e) => handleSearchOrigin(e.target.value)}
+                placeholder="A tua Localização"
+                aria-label="Local Atual"
+                className="w-full text-sm text-gray-900 bg-transparent outline-none"
+              />
+            </form>
+            {/* <div className="text-[10px] text-gray-400 font-bold uppercase tracking-wider">Local Atual</div>
+            <div className="font-semibold text-sm text-gray-900">Cine Caxito</div> */}
           </div>
+          
         </div>
+
+        {/* Suggestions Dropdown for ORIGIN (added) */}
+        {showOriginSuggestions && originSuggestions.length > 0 && (
+          <div className="bg-white rounded-lg shadow-2xl overflow-hidden border border-gray-100 mt-1 max-h-48 overflow-y-auto animate-in fade-in slide-in-from-top-2">
+            {originSuggestions.map((item, idx) => (
+              <button 
+                key={idx} 
+                onClick={() => selectOriginSuggestion(item)}
+                className="w-full text-left px-4 py-3 text-sm text-gray-700 hover:bg-gray-50 border-b border-gray-50 last:border-none flex items-center gap-2 font-medium"
+              >
+                <MapPin className="w-4 h-4 text-gray-400" />
+                {item}
+              </button>
+            ))}
+          </div>
+        )}
 
         {/* Destination Input - Black Background / White Text */}
         <div className="bg-gray-900 p-3 rounded-lg shadow-xl flex items-center gap-3 relative border border-gray-800 transition-all focus-within:ring-2 focus-within:ring-[#007FF0]">

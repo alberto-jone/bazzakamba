@@ -171,8 +171,20 @@ export const HomeScreen: React.FC<HomeScreenProps> = ({
           {/* Substituindo bg-blue-500 e ring-blue-100 */}
           <div className="w-2 h-2 bg-[#007FF0] rounded-full ml-1 ring-4 ring-[#007FF0]/20"></div>
           <div className="flex-1">
-            <div className="text-[10px] text-gray-400 font-bold uppercase tracking-wider">Local Atual</div>
-            <div className="font-semibold text-sm text-gray-900">Cine Caxito</div>
+            <form action="">
+              <label htmlFor="LocalAtual" className="text-[10px] text-gray-400 font-bold uppercase tracking-wider">Local Atual</label>
+              <input
+                type="text"
+                name="localAtual"
+                id="LocalAtual"
+                title="Local Atual"
+                placeholder="Cine Caxito"
+                aria-label="Local Atual"
+                className="w-full text-sm text-gray-900 bg-transparent outline-none"
+              />
+            </form>
+            {/* <div className="text-[10px] text-gray-400 font-bold uppercase tracking-wider">Local Atual</div>
+            <div className="font-semibold text-sm text-gray-900">Cine Caxito</div> */}
           </div>
         </div>
 
