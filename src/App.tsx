@@ -14,8 +14,10 @@ import { db } from './services/db';
 
 const App: React.FC = () => {
   const [currentView, setCurrentView] = useState<ViewState>('register');
-  const [selectedRide, setSelectedRide] = useState<RideOption>(RIDE_OPTIONS[1]); 
+  const [selectedRide, setSelectedRide] = useState<RideOption>(RIDE_OPTIONS[1]);
+  const [destination, setDestination] = useState<string>('Açucareira, Caxito');
   const [rideRating, setRideRating] = useState<number>(0);
+  const [currentRideId, setCurrentRideId] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
@@ -44,6 +46,12 @@ const App: React.FC = () => {
 
   const handleSimulationComplete = () => {
     db.incrementSimulationCount();
+
+    // Completar a viagem se existir
+    if (currentRideId) {
+      db.completeRide(currentRideId);
+    }
+
     navigate('rating');
   };
 
@@ -70,9 +78,23 @@ const App: React.FC = () => {
           {currentView === 'admin' && <AdminScreen onBack={handleLogout} onGoToMap={() => navigate('driver_mode')} />}
           {currentView === 'driver_mode' && <DriverModeScreen onExit={() => navigate('admin')} />}
           {currentView === 'prototype_feedback' && <PrototypeFeedbackScreen onFinish={() => { setRideRating(0); navigate('home'); }} />}
-          {currentView === 'home' && <HomeScreen selectedRide={selectedRide} onSelectRide={handleRideSelect} onNext={() => navigate('selection')} onNavigateTo={(view) => navigate(view)} onLogout={handleLogout} />}
-          {currentView === 'selection' && <SelectionScreen selectedRide={selectedRide} onSelect={handleRideSelect} onBack={() => navigate('home')} onConfirm={() => navigate('tracking')} />}
-          {currentView === 'tracking' && <TrackingScreen selectedRide={selectedRide} onCancel={() => navigate('home')} onComplete={handleSimulationComplete} />}
+          {currentView === 'home' && <HomeScreen selectedRide={selectedRide} onSelectRide={handleRideSelect} onNext={(dest) => { setDestination(dest); navigate('selection'); }} onNavigateTo={(view) => navigate(view)} onLogout={handleLogout} />}
+          {currentView === 'selection' && <SelectionScreen selectedRide={selectedRide} onSelect={handleRideSelect} onBack={() => navigate('home')} onConfirm={() => {
+            // Criar viagem quando confirmar seleção
+            const user = db.getLoggedInUser();
+            if (user) {
+              const ride = db.saveRide({
+                userId: user.id,
+                destination: destination,
+                origin: 'Localização atual',
+                rideType: selectedRide.type,
+                startedAt: new Date().toISOString()
+              });
+              setCurrentRideId(ride.id);
+            }
+            navigate('tracking');
+          }} />}
+          {currentView === 'tracking' && <TrackingScreen selectedRide={selectedRide} destination={destination} onCancel={() => navigate('home')} onComplete={handleSimulationComplete} />}
           {currentView === 'rating' && <RatingScreen rating={rideRating} setRating={setRideRating} onSubmit={() => navigate('summary')} onSkip={() => navigate('summary')} />}
           {currentView === 'summary' && <SummaryScreen selectedRide={selectedRide} rating={rideRating} onHome={() => { setRideRating(0); navigate('home'); }} onFeedbackApp={() => navigate('prototype_feedback')} />}
         </div>

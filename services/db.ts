@@ -247,7 +247,29 @@ export const db = {
         console.error('Erro ao salvar viagem no Supabase:', error);
       });
     }
+
+    console.log("✅ Viagem salva com sucesso:", newRide);
     return newRide;
+  },
+
+  // Completar uma viagem existente
+  completeRide: (rideId: string) => {
+    const rides = db.getRides();
+    const ride = rides.find(r => r.id === rideId);
+
+    if (ride) {
+      ride.completedAt = new Date().toISOString();
+      localStorage.setItem(DB_KEYS.RIDE_HISTORY, JSON.stringify(rides));
+
+      if (supabase) {
+        supabase.from('ride_history').update({ completedAt: ride.completedAt }).eq('id', rideId).catch((error: any) => {
+          console.error('Erro ao completar viagem no Supabase:', error);
+        });
+      }
+
+      console.log("✅ Viagem completada:", ride);
+    }
+    return ride;
   },
 
   getRides: (): Ride[] => {
@@ -261,7 +283,23 @@ export const db = {
   },
 
   getTotalRidesCount: (): number => {
-    return db.getRides().length;
+    return db.getRides().filter(r => r.completedAt).length;
+  },
+
+  // Contar viagens por usuário (motorista)
+  getRidesCountByUser: (userId: string): number => {
+    return db.getRidesByUser(userId).filter(r => r.completedAt).length;
+  },
+
+  // Obter avaliação média de um motorista
+  getDriverAverageRating: (driverId?: string): number => {
+    const feedbacks = driverId
+      ? db.getDriverFeedback() // Se for passado driverId, pode filtrar depois
+      : db.getDriverFeedback();
+
+    if (feedbacks.length === 0) return 0;
+    const total = feedbacks.reduce((acc, f) => acc + f.rideRating, 0);
+    return Math.round((total / feedbacks.length) * 10) / 10;
   },
 
   // --- FEEDBACK DO PROTOTIPO (APP) ---
