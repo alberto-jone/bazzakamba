@@ -14,7 +14,7 @@ export const RIDE_OPTIONS: RideOption[] = [
   {
     id: 'economy',
     name: 'Econômico',
-    price: 2000, // 2.000 Kz
+    price: 650, // 2.000 Kz
     image: 'compact',
     eta: '4 min',
     capacity: 4,
@@ -24,8 +24,8 @@ export const RIDE_OPTIONS: RideOption[] = [
   {
     id: 'standard',
     name: 'Conforto',
-    price: 3500, // 3.500 Kz
-    image: 'sedan',
+    price: 1750, // 3.500 Kz
+    image: 'suv',
     eta: '6 min',
     capacity: 4,
     type: 'car',

@@ -274,11 +274,11 @@ export const HomeScreen: React.FC<HomeScreenProps> = ({
       </div>
 
       {/* Bottom Sheet - Ride Selector */}
-      <div className="mt-auto z-10 bg-white rounded-t-3xl shadow-[0_-10px_40px_-15px_rgba(0,0,0,0.2)] p-5 pb-8 space-y-4">
+      <div className="mt-auto grid place-items-center z-10 bg-white rounded-t-3xl shadow-[0_-10px_40px_-15px_rgba(0,0,0,0.2)] p-5 pb-8 space-y-4">
         <div className="w-10 h-1 bg-gray-300 rounded-full mx-auto mb-2"></div>
 
         {/* Ride Options Grid - Interactive & Colorful */}
-        <div className="grid grid-cols-4 gap-2">
+        <div className="grid grid-cols-4 gap-2 place-items-center justify-items-center">
           {RIDE_OPTIONS.map(ride => {
             const isSelected = selectedRide.id === ride.id;
             return (
@@ -286,18 +286,18 @@ export const HomeScreen: React.FC<HomeScreenProps> = ({
                 key={ride.id}
                 onClick={() => onSelectRide(ride)}
                 // Substituindo bg-blue-50
-                className={`flex flex-col items-center gap-2 p-2 rounded-xl transition-all duration-200 ${isSelected ? 'bg-[#007FF0]/10 scale-105 shadow-sm ring-1 ring-[#007FF0]' : 'hover:bg-gray-50 opacity-70 hover:opacity-100'
+                className={`flex flex-col items-center justify-center h-24 gap-2 p-2 rounded-xl transition-all duration-200 ${isSelected ? 'bg-[#007FF0]/10 scale-105 shadow-sm ring-1 ring-[#007FF0]' : 'hover:bg-gray-50 opacity-70 hover:opacity-100'
                   }`}
               >
-                <div className={`w-14 h-10 flex items-center justify-center transition-all`}>
+                <div className={`w-16 h-16 flex-1 flex items-center justify-center transition-all`}>
                   <VehicleSideIcon category={ride.id} color={ride.color} />
                 </div>
-                <div className="flex flex-col items-center">
+                <div className="flex flex-col items-center mt-1">
                   <span className={`text-[10px] font-bold leading-tight ${isSelected ? 'text-black' : 'text-gray-500'}`}>
                     {ride.name.split(' ')[0]}
                   </span>
                   <span className={`text-[10px] font-bold ${isSelected ? 'text-[#007FF0]' : 'text-gray-400'}`}>
-                    Kz {ride.price}
+                    Desde {ride.price} kz
                   </span>
                 </div>
               </button>
