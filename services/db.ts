@@ -50,13 +50,24 @@ export const db = {
   init: async () => {
     // Local Storage Fallback Initialization
     const isInitialized = localStorage.getItem(DB_KEYS.INIT_FLAG);
-    if (!isInitialized) {
+
+    // Garante que o admin sempre existe
+    const existingUsers = localStorage.getItem(DB_KEYS.USERS);
+    const users = existingUsers ? JSON.parse(existingUsers) : [];
+
+    // Verifica se admin existe
+    const adminExists = users.some((u: User) => u.role === 'admin');
+
+    if (!isInitialized || !adminExists) {
       console.log("Inicializando Banco de Dados Local...");
 
-      // Seeding Admin apenas
-      if (!localStorage.getItem(DB_KEYS.USERS)) {
-        localStorage.setItem(DB_KEYS.USERS, JSON.stringify(SEED_USERS));
+      // Seeding Admin se não existir
+      if (!adminExists) {
+        users.push(SEED_USERS[0]);
+        localStorage.setItem(DB_KEYS.USERS, JSON.stringify(users));
+        console.log("✅ Admin criado com sucesso");
       }
+
       if (!localStorage.getItem(DB_KEYS.STATS_SIMULATIONS)) {
         localStorage.setItem(DB_KEYS.STATS_SIMULATIONS, '0');
       }
@@ -108,6 +119,8 @@ export const db = {
   // Autenticação com Senha
   authenticate: (identifier: string, passwordInput: string): User | null => {
     const users = db.getUsers();
+    console.log("🔍 Tentando autenticar:", identifier);
+    console.log("👥 Usuários disponíveis:", users.map(u => ({ name: u.name, email: u.email, role: u.role })));
 
     const user = users.find(u =>
       (u.email.toLowerCase() === identifier.toLowerCase() || u.phone === identifier) &&
@@ -115,10 +128,16 @@ export const db = {
     );
 
     if (user) {
+      console.log("✅ Usuário encontrado:", user.name);
       // Verifica senha
       if (user.password === passwordInput) {
+        console.log("✅ Senha correta!");
         return user;
+      } else {
+        console.log("❌ Senha incorreta. Esperada:", user.password, "Recebida:", passwordInput);
       }
+    } else {
+      console.log("❌ Usuário não encontrado com email/telefone:", identifier);
     }
     return null;
   },
