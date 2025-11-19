@@ -52,6 +52,16 @@ const App: React.FC = () => {
 
   // Track completion
   const handleSimulationComplete = () => {
+    // Salva viagem completada
+    const currentUser = db.getLoggedInUser();
+    if (currentUser) {
+      db.saveRide({
+        userId: currentUser.id,
+        destination,
+        rideType: selectedRide.name,
+        startedAt: new Date().toISOString()
+      });
+    }
     db.incrementSimulationCount();
     navigate('rating');
   };

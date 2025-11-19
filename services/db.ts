@@ -2,10 +2,6 @@
 import { User, PrototypeFeedback, DriverFeedback, UserRole } from '../types';
 
 // --- CONFIGURAÇÃO DE BANCO DE DADOS REMOTO (SUPABASE) ---
-// Para habilitar persistência real entre dispositivos:
-// 1. Crie um projeto em supabase.com
-// 2. Copie a URL e a ANON KEY para as variáveis abaixo.
-// 3. Crie as tabelas 'users', 'app_feedback', 'driver_feedback', 'stats'.
 const SUPABASE_URL = 'https://sgepvykxaezscvnwyvdj.supabase.co';
 const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InNnZXB2eWt4YWV6c2N2bnd5dmRqIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjMzMDE1MzksImV4cCI6MjA3ODg3NzUzOX0.2tTtl0QZMgbf-TNlJ9PZBabgJT9BHnvD_gM-gpWfVZA';
 
@@ -15,12 +11,24 @@ const supabase = (window.supabase && SUPABASE_URL && SUPABASE_KEY)
   ? window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY)
   : null;
 
+// Interface para viagens
+export interface Ride {
+  id: string;
+  userId: string;
+  destination: string;
+  origin?: string;
+  rideType: string;
+  startedAt: string;
+  completedAt?: string;
+}
+
 const DB_KEYS = {
-  USERS: 'bk_users_v3', // Bump version to clear old data
-  CURRENT_USER: 'bk_current_user_session_v3',
-  STATS_SIMULATIONS: 'bk_stats_simulations_v3',
-  FEEDBACK_APP: 'bk_feedback_app_v3',
-  FEEDBACK_DRIVER: 'bk_feedback_driver_v3',
+  USERS: 'bk_users_v4',
+  CURRENT_USER: 'bk_current_user_session_v4',
+  STATS_SIMULATIONS: 'bk_stats_simulations_v4',
+  FEEDBACK_APP: 'bk_feedback_app_v4',
+  FEEDBACK_DRIVER: 'bk_feedback_driver_v4',
+  RIDE_HISTORY: 'bk_ride_history_v4',
   INIT_FLAG: 'bk_db_initialized_v4'
 };
 
@@ -67,6 +75,36 @@ export const db = {
     localStorage.setItem(DB_KEYS.CURRENT_USER, JSON.stringify(user));
   },
 
+  // Verificar se usuário já existe (por telefone ou email)
+  checkUserExists: async (phone: string, email?: string): Promise<User | null> => {
+    // Primeiro tenta Supabase
+    if (supabase) {
+      try {
+        const query = supabase.from('users').select('*');
+
+        if (phone) {
+          const { data: byPhone } = await query.eq('phone', phone);
+          if (byPhone && byPhone.length > 0) {
+            return byPhone[0] as User;
+          }
+        }
+
+        if (email) {
+          const { data: byEmail } = await supabase.from('users').select('*').eq('email', email);
+          if (byEmail && byEmail.length > 0) {
+            return byEmail[0] as User;
+          }
+        }
+      } catch (error) {
+        console.error('Erro ao verificar usuário no Supabase:', error);
+      }
+    }
+
+    // Fallback para localStorage
+    const users = db.getUsers();
+    return users.find(u => u.phone === phone || (email && u.email === email)) || null;
+  },
+
   // Autenticação com Senha
   authenticate: (identifier: string, passwordInput: string): User | null => {
     const users = db.getUsers();
@@ -96,13 +134,13 @@ export const db = {
 
   // --- GESTÃO DE USUÁRIOS ---
 
-  // Cadastro de Passageiro (Sem senha, apenas ID básico)
-  registerUser: (userData: Omit<User, 'id' | 'registeredAt' | 'role' | 'password'>) => {
-    const users = db.getUsers();
-
+  // Cadastro de Passageiro com verificação de existência
+  registerUser: async (userData: Omit<User, 'id' | 'registeredAt' | 'role' | 'password'>) => {
     // Verifica se já existe
-    const existingUser = users.find(u => u.phone === userData.phone);
-    if (existingUser) return existingUser;
+    const existingUser = await db.checkUserExists(userData.phone, userData.email);
+    if (existingUser) {
+      return existingUser;
+    }
 
     const newUser: User = {
       ...userData,
@@ -112,6 +150,7 @@ export const db = {
     };
 
     // 1. Salva Local
+    const users = db.getUsers();
     users.push(newUser);
     localStorage.setItem(DB_KEYS.USERS, JSON.stringify(users));
 
@@ -119,6 +158,7 @@ export const db = {
     if (supabase) {
       supabase.from('users').insert([newUser]).then(({ error }: any) => {
         if (error) console.error('Erro ao salvar no Supabase:', error);
+        else console.log('Usuário cadastrado com sucesso no Supabase');
       });
     }
 
@@ -150,6 +190,7 @@ export const db = {
     if (supabase) {
       supabase.from('users').insert([newDriver]).then(({ error }: any) => {
         if (error) console.error('Erro ao salvar motorista no Supabase:', error);
+        else console.log('Motorista cadastrado com sucesso no Supabase');
       });
     }
 
@@ -163,7 +204,6 @@ export const db = {
 
   // --- ESTATÍSTICAS ---
   incrementSimulationCount: () => {
-    // Local
     const current = parseInt(localStorage.getItem(DB_KEYS.STATS_SIMULATIONS) || '0');
     const newVal = current + 1;
     localStorage.setItem(DB_KEYS.STATS_SIMULATIONS, newVal.toString());
@@ -171,6 +211,38 @@ export const db = {
 
   getSimulationCount: (): number => {
     return parseInt(localStorage.getItem(DB_KEYS.STATS_SIMULATIONS) || '0');
+  },
+
+  // --- HISTÓRICO DE VIAGENS ---
+  saveRide: (ride: Omit<Ride, 'id'>) => {
+    const rides = db.getRides();
+    const newRide: Ride = {
+      ...ride,
+      id: Date.now().toString()
+    };
+    rides.push(newRide);
+    localStorage.setItem(DB_KEYS.RIDE_HISTORY, JSON.stringify(rides));
+
+    if (supabase) {
+      supabase.from('ride_history').insert([newRide]).catch((error: any) => {
+        console.error('Erro ao salvar viagem no Supabase:', error);
+      });
+    }
+    return newRide;
+  },
+
+  getRides: (): Ride[] => {
+    const data = localStorage.getItem(DB_KEYS.RIDE_HISTORY);
+    return data ? JSON.parse(data) : [];
+  },
+
+  getRidesByUser: (userId: string): Ride[] => {
+    const rides = db.getRides();
+    return rides.filter(r => r.userId === userId);
+  },
+
+  getTotalRidesCount: (): number => {
+    return db.getRides().length;
   },
 
   // --- FEEDBACK DO PROTOTIPO (APP) ---
@@ -186,13 +258,23 @@ export const db = {
     localStorage.setItem(DB_KEYS.FEEDBACK_APP, JSON.stringify(list));
 
     if (supabase) {
-      supabase.from('app_feedback').insert([newItem]);
+      supabase.from('app_feedback').insert([newItem]).then(({ error }: any) => {
+        if (error) console.error('Erro ao salvar feedback app no Supabase:', error);
+        else console.log('Feedback app salvo com sucesso no Supabase');
+      });
     }
   },
 
   getPrototypeFeedback: (): PrototypeFeedback[] => {
     const data = localStorage.getItem(DB_KEYS.FEEDBACK_APP);
     return data ? JSON.parse(data) : [];
+  },
+
+  getAverageAppRating: (): number => {
+    const feedbacks = db.getPrototypeFeedback();
+    if (feedbacks.length === 0) return 0;
+    const total = feedbacks.reduce((acc, f) => acc + f.rating, 0);
+    return Math.round((total / feedbacks.length) * 10) / 10;
   },
 
   // --- FEEDBACK DO MOTORISTA ---
@@ -208,7 +290,10 @@ export const db = {
     localStorage.setItem(DB_KEYS.FEEDBACK_DRIVER, JSON.stringify(list));
 
     if (supabase) {
-      supabase.from('driver_feedback').insert([newItem]);
+      supabase.from('driver_feedback').insert([newItem]).then(({ error }: any) => {
+        if (error) console.error('Erro ao salvar feedback motorista no Supabase:', error);
+        else console.log('Feedback motorista salvo com sucesso no Supabase');
+      });
     }
   },
 
