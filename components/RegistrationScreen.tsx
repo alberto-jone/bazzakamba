@@ -99,17 +99,12 @@ export const RegistrationScreen: React.FC<RegistrationScreenProps> = ({ onRegist
 
         {/* Header Logo */}
         <div className="flex flex-col items-center mb-8 mt-4">
-          <div className="mb-2 d-flex">
-            {
-              // COLOQUE SUA IMAGEM AQUI:
-              <img src="/logo.jpg" alt="Bazza Kamba" className="h-8 text-center" />
-            }
-            <h1 className="text-3xl font-black tracking-tighter text-[#007FF0]">
-              BAZZAKAMBA
-            </h1>
+          <div className="mb-4 flex justify-center">
+            <img src="/logo.jpg" alt="Bazza Kamba Logo" className="h-24 object-contain rounded-lg shadow-md" />
           </div>
-
-          <p className="text-gray-500 text-xs text-center mt-1 max-w-[250px] font-medium">
+          <h1 className="text-3xl font-black tracking-tighter text-[#007FF0]">
+            BAZZAKAMBA
+          </h1>          <p className="text-gray-500 text-xs text-center mt-1 max-w-[250px] font-medium">
             {mode === 'register'
               ? 'Crie sua conta para solicitar viagens e testar o protótipo.'
               : 'Área restrita para gestão e motoristas parceiros.'}

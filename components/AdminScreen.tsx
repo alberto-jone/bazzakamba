@@ -144,14 +144,17 @@ export const AdminScreen: React.FC<AdminScreenProps> = ({ onBack, onGoToMap }) =
         <div className="absolute top-0 right-0 w-32 h-32 bg-white/10 rounded-full blur-2xl -mr-10 -mt-10"></div>
 
         <div className="flex items-center justify-between mb-6 relative z-10">
+          <div className="flex items-center gap-3">
+            <img src="/logo.jpg" alt="Bazza Kamba" className="h-10 rounded shadow-md" />
+            <div className="flex flex-col items-start">
+              <h1 className="font-bold text-lg">{isAdmin ? 'Painel Admin' : 'Área do Motorista'}</h1>
+              <span className="text-[10px] opacity-80 uppercase tracking-wider font-medium">{currentUser.name}</span>
+            </div>
+          </div>
           <button onClick={onBack} className="p-2 bg-white/10 rounded-full hover:bg-white/20 transition-colors flex items-center gap-2 pr-4">
             <LogOut className="w-4 h-4" />
             <span className="text-xs font-bold">Sair</span>
           </button>
-          <div className="flex flex-col items-end">
-            <h1 className="font-bold text-lg">{isAdmin ? 'Painel Admin' : 'Área do Motorista'}</h1>
-            <span className="text-[10px] opacity-80 uppercase tracking-wider font-medium">{currentUser.name}</span>
-          </div>
         </div>
 
         {/* --- KEY METRICS GRID --- */}
