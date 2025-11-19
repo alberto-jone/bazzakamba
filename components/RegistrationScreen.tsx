@@ -100,7 +100,7 @@ export const RegistrationScreen: React.FC<RegistrationScreenProps> = ({ onRegist
         {/* Header Logo */}
         <div className="flex flex-col items-center mb-8 mt-4">
           <div className="mb-4 flex justify-center">
-            <img src="/logo.jpg" alt="Bazza Kamba Logo" className="h-24 object-contain rounded-lg shadow-md" />
+            <img src="/logo.jpg" alt="Bazza Kamba Logo" className="h-16 w-16 object-cover rounded-lg shadow-md" />
           </div>
           <h1 className="text-3xl font-black tracking-tighter text-[#007FF0]">
             BAZZAKAMBA
