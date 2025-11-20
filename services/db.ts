@@ -243,10 +243,22 @@ export const db = {
     localStorage.setItem(DB_KEYS.RIDE_HISTORY, JSON.stringify(rides));
 
     if (supabase) {
-      supabase.from('ride_history').insert([newRide]).catch((error: any) => {
+  supabase
+    .from('ride_history')
+    .insert(newRide)
+    .then(({ error, data }: any) => {
+      if (error) {
         console.error('Erro ao salvar viagem no Supabase:', error);
-      });
-    }
+      } else {
+        console.log('Viagem salva no Supabase:', data);
+      }
+    });
+}
+    // if (supabase) {
+    //   supabase.from('ride_history').insert([newRide]).catch((error: any) => {
+    //     console.error('Erro ao salvar viagem no Supabase:', error);
+    //   });
+    // }
 
     console.log("✅ Viagem salva com sucesso:", newRide);
     return newRide;

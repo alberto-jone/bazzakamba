@@ -1,16 +1,16 @@
 import React, { useState, useEffect } from 'react';
-import { HomeScreen } from './components.zip/HomeScreen';
-import { SelectionScreen } from './components.zip/SelectionScreen';
-import { TrackingScreen } from './components.zip/TrackingScreen';
-import { RatingScreen } from './components.zip/RatingScreen';
-import { SummaryScreen } from './components.zip/SummaryScreen';
-import { RegistrationScreen } from './components.zip/RegistrationScreen';
-import { AdminScreen } from './components.zip/AdminScreen';
-import { DriverModeScreen } from './components.zip/DriverModeScreen';
-import { PrototypeFeedbackScreen } from './components.zip/PrototypeFeedbackScreen';
+import { HomeScreen } from '../components/HomeScreen';
+import { SelectionScreen } from '../components/SelectionScreen';
+import { TrackingScreen } from '../components/TrackingScreen';
+import { RatingScreen } from '../components/RatingScreen';
+import { SummaryScreen } from '../components/SummaryScreen';
+import { RegistrationScreen } from './components/RegistrationScreen';
+import { AdminScreen } from '../components/AdminScreen';
+import { DriverModeScreen } from '../components/DriverModeScreen';
+import { PrototypeFeedbackScreen } from './components/PrototypeFeedbackScreen';
 import { ViewState, RideOption } from './types';
-import { RIDE_OPTIONS } from './constants';
-import { db } from './services/db';
+import { RIDE_OPTIONS } from '../constants';
+import { db } from '../services/db';
 
 const App: React.FC = () => {
   const [currentView, setCurrentView] = useState<ViewState>('register');
@@ -74,29 +74,82 @@ const App: React.FC = () => {
         </div>
 
         <div className="flex-1 h-full overflow-hidden bg-gray-50 relative flex flex-col">
-          {currentView === 'register' && <RegistrationScreen onRegister={handleLoginSuccess} onAdminRequest={() => navigate('admin')} />}
-          {currentView === 'admin' && <AdminScreen onBack={handleLogout} onGoToMap={() => navigate('driver_mode')} />}
-          {currentView === 'driver_mode' && <DriverModeScreen onExit={() => navigate('admin')} />}
-          {currentView === 'prototype_feedback' && <PrototypeFeedbackScreen onFinish={() => { setRideRating(0); navigate('home'); }} />}
-          {currentView === 'home' && <HomeScreen selectedRide={selectedRide} onSelectRide={handleRideSelect} onNext={(dest) => { setDestination(dest); navigate('selection'); }} onNavigateTo={(view) => navigate(view)} onLogout={handleLogout} />}
-          {currentView === 'selection' && <SelectionScreen selectedRide={selectedRide} onSelect={handleRideSelect} onBack={() => navigate('home')} onConfirm={() => {
-            // Criar viagem quando confirmar seleção
-            const user = db.getLoggedInUser();
-            if (user) {
-              const ride = db.saveRide({
-                userId: user.id,
-                destination: destination,
-                origin: 'Localização atual',
-                rideType: selectedRide.type,
-                startedAt: new Date().toISOString()
-              });
-              setCurrentRideId(ride.id);
-            }
-            navigate('tracking');
-          }} />}
-          {currentView === 'tracking' && <TrackingScreen selectedRide={selectedRide} destination={destination} onCancel={() => navigate('home')} onComplete={handleSimulationComplete} />}
-          {currentView === 'rating' && <RatingScreen rating={rideRating} setRating={setRideRating} onSubmit={() => navigate('summary')} onSkip={() => navigate('summary')} />}
-          {currentView === 'summary' && <SummaryScreen selectedRide={selectedRide} rating={rideRating} onHome={() => { setRideRating(0); navigate('home'); }} onFeedbackApp={() => navigate('prototype_feedback')} />}
+
+          {currentView === 'register' && (
+            <RegistrationScreen
+              onRegister={handleLoginSuccess}
+              onAdminRequest={() => navigate('admin')}
+            />
+          )}
+
+          {currentView === 'admin' && (
+            <AdminScreen
+              onBack={handleLogout}
+              onGoToMap={() => navigate('driver_mode')}
+            />
+          )}
+
+          {currentView === 'driver_mode' && (
+            <DriverModeScreen
+              onExit={() => navigate('admin')}
+            />
+          )}
+
+          {currentView === 'prototype_feedback' && (
+            <PrototypeFeedbackScreen onFinish={() => {
+              setRideRating(0);
+              navigate('home');
+            }} />
+          )}
+
+          {currentView === 'home' && (
+            <HomeScreen
+              selectedRide={selectedRide}
+              onSelectRide={handleRideSelect}
+              onNext={(dest) => { setDestination(dest); navigate('selection'); }}
+              onNavigateTo={(view) => navigate(view)}
+              onLogout={handleLogout}
+            />
+          )}
+
+          {currentView === 'selection' && (
+            <SelectionScreen
+              selectedRide={selectedRide}
+              onSelect={handleRideSelect}
+              onBack={() => navigate('home')}
+              onConfirm={() => navigate('tracking')}
+            />
+          )}
+
+          {currentView === 'tracking' && (
+            <TrackingScreen
+              selectedRide={selectedRide}
+              destination={destination}
+              onCancel={() => navigate('home')}
+              onComplete={handleSimulationComplete}
+            />
+          )}
+
+          {currentView === 'rating' && (
+            <RatingScreen
+              rating={rideRating}
+              setRating={setRideRating}
+              onSubmit={() => navigate('summary')}
+              onSkip={() => navigate('summary')}
+            />
+          )}
+
+          {currentView === 'summary' && (
+            <SummaryScreen
+              selectedRide={selectedRide}
+              rating={rideRating}
+              onHome={() => {
+                setRideRating(0);
+                navigate('home');
+              }}
+              onFeedbackApp={() => navigate('prototype_feedback')}
+            />
+          )}
         </div>
 
         <div className="absolute bottom-2 left-1/2 transform -translate-x-1/2 w-32 h-1.5 bg-black rounded-full opacity-20 z-50 pointer-events-none"></div>

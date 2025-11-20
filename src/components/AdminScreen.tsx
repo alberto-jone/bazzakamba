@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from 'react';
 import { LogOut, Download, Users, Activity, Star, Lock, AlertCircle, UserPlus, X, Car, MapPin } from 'lucide-react';
 import { db } from '../services/db';
-import { User, DriverFeedback } from '../types';
+import { User, DriverFeedback, PrototypeFeedback } from '../types';
 
 interface AdminScreenProps {
   onBack: () => void;
@@ -14,7 +14,7 @@ export const AdminScreen: React.FC<AdminScreenProps> = ({ onBack, onGoToMap }) =
   const [users, setUsers] = useState<User[]>([]);
   const [simCount, setSimCount] = useState(0);
   const [driverFeedbacks, setDriverFeedbacks] = useState<DriverFeedback[]>([]);
-  const [appFeedbacks, setAppFeedbacks] = useState([]);
+  const [appFeedbacks, setAppFeedbacks] = useState<PrototypeFeedback[]>([]);
   const [totalRides, setTotalRides] = useState(0);
   const [avgAppRating, setAvgAppRating] = useState(0);
 
