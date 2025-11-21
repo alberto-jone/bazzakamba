@@ -108,7 +108,7 @@ export const HomeScreen: React.FC<HomeScreenProps> = ({
               <div className="flex justify-between items-center mb-6">
                 <div className="flex items-center gap-2">
                   <img src="/logo.jpg" alt="vamu" className="h-8 rounded" />
-                  <span className="font-bold text-xl">vamu</span>
+                  <span className="font-bold text-xl"></span>
                 </div>
                 <button onClick={() => setIsMenuOpen(false)} className="p-2 hover:bg-white/20 rounded-full transition-colors" title="Fechar menu">
                   <X className="w-5 h-5" />
