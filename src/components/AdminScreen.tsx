@@ -129,7 +129,7 @@ export const AdminScreen: React.FC<AdminScreenProps> = ({ onBack, onGoToMap }) =
               />
 
               <div className="text-[10px] text-gray-500 mt-2 mb-4">
-                * A senha padrão será: <span className="font-mono font-bold text-gray-800">bazza@2025</span>
+                * A senha padrão será: <span className="font-mono font-bold text-gray-800">vamu@2025</span>
               </div>
 
               <button type="submit" className="w-full bg-[#007FF0] text-white font-bold py-3 rounded-xl hover:bg-[#0066CC] shadow-lg">

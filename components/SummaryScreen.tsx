@@ -47,7 +47,7 @@ export const SummaryScreen: React.FC<SummaryScreenProps> = ({ selectedRide, rati
              <div className="p-1 bg-white/20 rounded-md backdrop-blur-sm">
                  <ArrowRight className="w-3 h-3 text-white" />
              </div>
-             <span className="font-bold text-sm">Bazza Kamba</span>
+             <span className="font-bold text-sm">VAMU</span>
          </div>
          <h1 className="text-2xl font-bold">Resumo da Viagem</h1>
       </div>

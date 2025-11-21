@@ -1,5 +1,5 @@
 {
-  "name": "Bazza Kamba Rides",
+  "name": "VAMU",
   "description": "A full-featured ride-sharing application simulation with AI-powered feedback analysis.",
   "requestFramePermissions": [
     "geolocation"

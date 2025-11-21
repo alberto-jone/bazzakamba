@@ -107,8 +107,8 @@ export const HomeScreen: React.FC<HomeScreenProps> = ({
             <div className={`${isAdmin ? 'bg-gray-900' : 'bg-[#007FF0]'} p-6 pt-12 text-white transition-colors`}>
               <div className="flex justify-between items-center mb-6">
                 <div className="flex items-center gap-2">
-                  <img src="/logo.jpg" alt="Bazza Kamba" className="h-8 rounded" />
-                  <span className="font-bold text-xl">Bazza Kamba</span>
+                  <img src="/logo.jpg" alt="vamu" className="h-8 rounded" />
+                  <span className="font-bold text-xl">vamu</span>
                 </div>
                 <button onClick={() => setIsMenuOpen(false)} className="p-2 hover:bg-white/20 rounded-full transition-colors" title="Fechar menu">
                   <X className="w-5 h-5" />
@@ -175,7 +175,7 @@ export const HomeScreen: React.FC<HomeScreenProps> = ({
                 Sair da Conta
               </button>
               <div className="text-center mt-4 text-[10px] text-gray-400 font-medium">
-                Bazza Kamba v1.1.0 (RBAC)
+                VAMU v1.1.0 (RBAC)
               </div>
             </div>
           </div>

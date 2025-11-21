@@ -40,9 +40,9 @@ const SEED_USERS: User[] = [
   {
     id: 'admin-001',
     name: 'Administrador',
-    email: 'admin@bazzakamba.ao',
+    email: 'admin@vamu.ao',
     phone: '000000000',
-    password: 'bazza@2025', // Senha fixa do Admin
+    password: 'vamu@2025', // Senha fixa do Admin
     role: 'admin',
     registeredAt: new Date().toISOString()
   }
@@ -151,7 +151,7 @@ export const db = {
       phone: driverData.phone,
       plate: driverData.plate,
       role: 'driver',
-      password: 'bazza@2025', // Senha padrão inicial
+      password: 'vamu@2025', // Senha padrão inicial
       registeredAt: new Date().toISOString()
     };
 
@@ -336,7 +336,7 @@ export const db = {
     const simCount = db.getSimulationCount();
 
     const rows = [
-      ['RELATORIO GERAL - BAZZA KAMBA'],
+      ['RELATORIO GERAL - VAMU'],
       ['Data de Geracao', new Date().toISOString()],
       ['Simulacoes Totais', simCount.toString()],
       [],
@@ -378,7 +378,7 @@ export const db = {
     const encodedUri = encodeURI(csvContent);
     const link = document.createElement("a");
     link.setAttribute("href", encodedUri);
-    link.setAttribute("download", `bazza_kamba_report_${new Date().getTime()}.csv`);
+    link.setAttribute("download", `vamu_report_${new Date().getTime()}.csv`);
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);

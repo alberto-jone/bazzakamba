@@ -66,7 +66,7 @@ export const RegistrationScreen: React.FC<RegistrationScreenProps> = ({ onRegist
       db.loginUser(user);
       onRegister();
     } else {
-      setError('Credenciais inválidas. Tente admin@bazzakamba.ao / bazza@2025');
+      setError('Credenciais inválidas. Tente admin@vamu.ao / vamu@2025');
     }
 
     setLoading(false);
@@ -100,10 +100,10 @@ export const RegistrationScreen: React.FC<RegistrationScreenProps> = ({ onRegist
         {/* Header Logo */}
         <div className="flex flex-col items-center mb-8 mt-4">
           <div className="mb-4 flex justify-center">
-            <img src="/logo.jpg" alt="Bazza Kamba Logo" className="h-20 object-contain rounded-lg shadow-md" />
+            <img src="/logo.jpg" alt="vamu Logo" className="h-20 object-contain rounded-lg shadow-md" />
           </div>
           <h1 className="text-3xl font-black tracking-tighter text-[#007FF0]">
-            BAZZAKAMBA
+            VAMU
           </h1>          <p className="text-gray-500 text-xs text-center mt-1 max-w-[250px] font-medium">
             {mode === 'register'
               ? 'Crie sua conta para solicitar viagens e testar o protótipo.'
@@ -147,7 +147,7 @@ export const RegistrationScreen: React.FC<RegistrationScreenProps> = ({ onRegist
                 {loading ? 'Processando...' : <>Criar Conta e Entrar <ArrowRight className="w-4 h-4" /></>}
               </button>
               <p className="text-[10px] text-center text-gray-400 mt-4">
-                Ao continuar, você concorda com os Termos de Uso do protótipo Bazza Kamba.
+                Ao continuar, você concorda com os Termos de Uso do protótipo VAMU.
               </p>
             </div>
           </form>
@@ -165,7 +165,7 @@ export const RegistrationScreen: React.FC<RegistrationScreenProps> = ({ onRegist
               <input
                 required
                 type="text"
-                placeholder="Ex: admin@bazzakamba.ao"
+                placeholder="Ex: admin@vamu.ao"
                 className="w-full p-4 bg-gray-50 rounded-xl border border-gray-200 focus:border-gray-900 focus:bg-white outline-none transition-all text-sm font-bold text-gray-900 placeholder-gray-400"
                 value={loginData.identifier}
                 onChange={e => setLoginData({ ...loginData, identifier: e.target.value })}

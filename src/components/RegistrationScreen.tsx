@@ -46,7 +46,7 @@ export const RegistrationScreen: React.FC<RegistrationScreenProps> = ({ onRegist
       db.loginUser(user);
       onRegister(); 
     } else {
-      setError('Credenciais inválidas. Tente admin@bazzakamba.ao / bazza@2025');
+      setError('Credenciais inválidas. Tente admin@vamu.ao / vamu@2025');
     }
   };
 
@@ -85,7 +85,7 @@ export const RegistrationScreen: React.FC<RegistrationScreenProps> = ({ onRegist
                 <img src="/caminho/para/logo.png" alt="Bazza Kamba" className="h-12" />
               */}
               <h1 className="text-3xl font-black tracking-tighter text-[#007FF0]">
-                BAZZAKAMBA
+                VAMU
               </h1>
            </div>
            
@@ -131,7 +131,7 @@ export const RegistrationScreen: React.FC<RegistrationScreenProps> = ({ onRegist
                 Criar Conta e Entrar <ArrowRight className="w-4 h-4" />
               </button>
               <p className="text-[10px] text-center text-gray-400 mt-4">
-                Ao continuar, você concorda com os Termos de Uso do protótipo Bazza Kamba.
+                Ao continuar, você concorda com os Termos de Uso do protótipo Vamu.
               </p>
             </div>
           </form>
@@ -149,7 +149,7 @@ export const RegistrationScreen: React.FC<RegistrationScreenProps> = ({ onRegist
               <input 
                 required
                 type="text"
-                placeholder="Ex: admin@bazzakamba.ao"
+                placeholder="Ex: admin@vamu.ao"
                 className="w-full p-4 bg-gray-50 rounded-xl border border-gray-200 focus:border-gray-900 focus:bg-white outline-none transition-all text-sm font-bold text-gray-900 placeholder-gray-400"
                 value={loginData.identifier}
                 onChange={e => setLoginData({...loginData, identifier: e.target.value})}

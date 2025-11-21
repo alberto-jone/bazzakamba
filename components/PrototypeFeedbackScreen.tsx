@@ -21,7 +21,7 @@ export const PrototypeFeedbackScreen: React.FC<{ onFinish: () => void }> = ({ on
          </div>
          <div>
             <h2 className="text-2xl font-bold text-gray-900">Obrigado!</h2>
-            <p className="text-gray-500 mt-2">Sua opinião ajuda a melhorar o Bazza Kamba.</p>
+            <p className="text-gray-500 mt-2">Sua opinião ajuda a melhorar o vamu.</p>
          </div>
          <button 
             onClick={onFinish}

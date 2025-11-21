@@ -192,7 +192,7 @@ export const AdminScreen: React.FC<AdminScreenProps> = ({ onBack, onGoToMap }) =
     doc.setFont("helvetica", "bold");
     // Ajusta posição do texto dependendo se tem logo ou não
     const textX = logoData ? 40 : 14;
-    doc.text("BAZZA KAMBA", textX, 20);
+    doc.text("VAMU", textX, 20);
     
     doc.setFontSize(10);
     doc.setFont("helvetica", "normal");
@@ -334,10 +334,10 @@ export const AdminScreen: React.FC<AdminScreenProps> = ({ onBack, onGoToMap }) =
       doc.setPage(i);
       doc.setFontSize(8);
       doc.setTextColor(150);
-      doc.text(`Página ${i} de ${pageCount} - Bazza Kamba Sistema de Gestão`, pageWidth / 2, doc.internal.pageSize.height - 10, { align: 'center' });
+      doc.text(`Página ${i} de ${pageCount} - vamu aplicativo de táxi`, pageWidth / 2, doc.internal.pageSize.height - 10, { align: 'center' });
     }
 
-    doc.save(`Relatorio_BazzaKamba_${new Date().getTime()}.pdf`);
+    doc.save(`Relatorio_vamu_${new Date().getTime()}.pdf`);
   };
   // --- FIM DA FUNÇÃO PDF ---
 
@@ -353,7 +353,7 @@ export const AdminScreen: React.FC<AdminScreenProps> = ({ onBack, onGoToMap }) =
 
       <aside className={`absolute md:relative inset-y-0 left-0 z-30 w-64 bg-white border-r border-gray-200 flex flex-col transition-transform duration-300 ease-in-out ${isSidebarOpen ? 'translate-x-0' : '-translate-x-full md:translate-x-0'}`}>
         <div className="p-6 flex items-center justify-between">
-          <div className="flex items-center gap-2"><img src="/logo.jpg" alt="Bazza" className="h-8 rounded shadow-sm" /><span className="font-black text-lg tracking-tight text-gray-800">ADMIN</span></div>
+          <div className="flex items-center gap-2"><img src="/logo.jpg" alt="vamu" className="h-8 rounded shadow-sm" /><span className="font-black text-lg tracking-tight text-gray-800">ADMIN</span></div>
           <button onClick={() => setIsSidebarOpen(false)} className="md:hidden text-gray-400 hover:text-gray-600"><X className="w-6 h-6" /></button>
         </div>
         <div className="flex-1 px-4 space-y-2 mt-2 overflow-y-auto">
@@ -477,7 +477,7 @@ export const AdminScreen: React.FC<AdminScreenProps> = ({ onBack, onGoToMap }) =
               <input required value={newDriver.name} onChange={e => setNewDriver({ ...newDriver, name: e.target.value })} className="w-full p-3 bg-gray-50 rounded-xl border border-gray-200 text-sm outline-none" placeholder="Nome Completo" />
               <div className="grid grid-cols-2 gap-3"><input required type="tel" value={newDriver.phone} onChange={e => setNewDriver({ ...newDriver, phone: e.target.value })} className="w-full p-3 bg-gray-50 rounded-xl border border-gray-200 text-sm outline-none" placeholder="Telefone" /><input required value={newDriver.plate} onChange={e => setNewDriver({ ...newDriver, plate: e.target.value })} className="w-full p-3 bg-gray-50 rounded-xl border border-gray-200 text-sm outline-none" placeholder="Matrícula" /></div>
               <input required type="email" value={newDriver.email} onChange={e => setNewDriver({ ...newDriver, email: e.target.value })} className="w-full p-3 bg-gray-50 rounded-xl border border-gray-200 text-sm outline-none" placeholder="Email" />
-              <div className="bg-blue-50 p-3 rounded-lg text-blue-800 text-[10px] mt-2">Senha padrão: <span className="font-mono font-bold">bazza@2025</span></div>
+              <div className="bg-blue-50 p-3 rounded-lg text-blue-800 text-[10px] mt-2">Senha padrão: <span className="font-mono font-bold">vamu@2025</span></div>
               <button type="submit" className="w-full bg-[#007FF0] text-white font-bold py-3 rounded-xl hover:bg-[#0066CC] shadow-lg mt-4">Confirmar Cadastro</button>
             </form>
           </div>
