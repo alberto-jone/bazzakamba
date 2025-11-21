@@ -13,7 +13,7 @@ interface TrackingScreenProps {
 }
 
 export const TrackingScreen: React.FC<TrackingScreenProps> = ({ selectedRide, destination, onCancel, onComplete }) => {
-  const displayDestination = destination ? `${destination}` : 'Açucareira, Caxito';
+  const displayDestination = destination ? `${destination}` : 'multiperfil, Luanda';
   const [status, setStatus] = useState<RideStatus>('searching');
   const [timeDisplay, setTimeDisplay] = useState('Procurando...');
   const [infoText, setInfoText] = useState('Localizando motoristas próximos...');
@@ -158,7 +158,7 @@ export const TrackingScreen: React.FC<TrackingScreenProps> = ({ selectedRide, de
         {status === 'traveling' && (
           <div className="absolute top-20 right-4 bg-white/90 backdrop-blur-md p-3 rounded-xl shadow-lg z-10 flex flex-col gap-1 border border-gray-200 max-w-[140px] animate-in slide-in-from-right-5">
             <span className="text-[10px] text-gray-500 font-bold uppercase">Destino</span>
-            <span className="font-bold text-gray-900 text-sm leading-tight">Açucareira, Caxito</span>
+            <span className="font-bold text-gray-900 text-sm leading-tight">multiperfil, Luanda</span>
           </div>
         )}
       </div>

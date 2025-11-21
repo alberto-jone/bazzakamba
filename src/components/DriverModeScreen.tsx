@@ -125,7 +125,7 @@ export const DriverModeScreen: React.FC<DriverModeScreenProps> = ({ onExit }) =>
                 </div>
                 <div className="flex items-center gap-3">
                     <div className="w-2 h-2 bg-red-500 rounded-full"></div>
-                    <span className="text-sm font-medium text-gray-800">Açucareira</span>
+                    <span className="text-sm font-medium text-gray-800">multiperfil</span>
                 </div>
             </div>
 
@@ -202,7 +202,7 @@ export const DriverModeScreen: React.FC<DriverModeScreenProps> = ({ onExit }) =>
                         </div>
                         <div>
                             <div className="text-[10px] text-gray-400 font-bold uppercase">Destino Final</div>
-                            <div className="font-bold text-lg leading-tight">Açucareira</div>
+                            <div className="font-bold text-lg leading-tight">multiperfil</div>
                         </div>
                     </div>
                     <div className="text-right">

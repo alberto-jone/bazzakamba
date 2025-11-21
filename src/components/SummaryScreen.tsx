@@ -78,11 +78,11 @@ export const SummaryScreen: React.FC<SummaryScreenProps> = ({ selectedRide, rati
                     <div className="flex-1 space-y-4">
                         <div>
                             <p className="text-xs text-gray-400">Partida</p>
-                            <p className="font-semibold text-gray-900">Cine Caxito</p>
+                            <p className="font-semibold text-gray-900">Gamek</p>
                         </div>
                         <div>
                             <p className="text-xs text-gray-400">Destino</p>
-                            <p className="font-semibold text-gray-900">Açucareira</p>
+                            <p className="font-semibold text-gray-900">multiperfil</p>
                         </div>
                     </div>
                 </div>

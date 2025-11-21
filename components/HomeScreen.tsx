@@ -248,7 +248,7 @@ export const HomeScreen: React.FC<HomeScreenProps> = ({
               type="text"
               value={destination}
               onChange={(e) => handleSearch(e.target.value)}
-              placeholder="Digite o destino (ex: Açucareira)"
+              placeholder="Digite o destino (ex: Gamek)"
               className="w-full font-bold text-sm text-white placeholder-gray-500 bg-transparent outline-none"
             />
           </div>

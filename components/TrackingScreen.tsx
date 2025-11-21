@@ -14,7 +14,7 @@ interface TrackingScreenProps {
 
 export const TrackingScreen: React.FC<TrackingScreenProps> = ({ selectedRide, destination, onCancel, onComplete }) => {
   // Display destination fallback
-  const displayDestination = destination ? `${destination}` : 'Açucareira, Caxito';
+  const displayDestination = destination ? `${destination}` : 'multiperfil, Luanda';
   const [status, setStatus] = useState<RideStatus>('searching');
   const [timeDisplay, setTimeDisplay] = useState('Procurando...');
   const [infoText, setInfoText] = useState('Localizando motoristas próximos...');
@@ -94,7 +94,7 @@ export const TrackingScreen: React.FC<TrackingScreenProps> = ({ selectedRide, de
       // 4. Traveling Phase (Longer: 12s)
       setStatus('traveling');
       setTimeDisplay('Em viagem');
-      setInfoText(`Destino: ${destination || 'Açucareira'}`);
+      setInfoText(`Destino: ${destination || 'multiperfil'}`);
 
       await new Promise(r => setTimeout(r, 14000)); // 14 seconds trip
       if (!isMountedRef.current) return;

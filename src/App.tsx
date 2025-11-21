@@ -15,7 +15,7 @@ import { db } from '../services/db';
 const App: React.FC = () => {
   const [currentView, setCurrentView] = useState<ViewState>('register');
   const [selectedRide, setSelectedRide] = useState<RideOption>(RIDE_OPTIONS[1]);
-  const [destination, setDestination] = useState<string>('Açucareira, Caxito');
+  const [destination, setDestination] = useState<string>('multiperfil, Luanda');
   const [rideRating, setRideRating] = useState<number>(0);
   const [currentRideId, setCurrentRideId] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(true);

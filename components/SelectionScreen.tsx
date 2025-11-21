@@ -26,7 +26,7 @@ export const SelectionScreen: React.FC<SelectionScreenProps> = ({
           <ArrowLeft className="w-4 h-4" /> Voltar
         </button>
         <h1 className="text-2xl font-bold">Escolha a Viagem</h1>
-        <p className="text-white/80 text-sm mt-1">Caxito ➔ Açucareira</p>
+        <p className="text-white/80 text-sm mt-1">Luanda ➔ Gamek</p>
       </div>
 
       {/* List */}
