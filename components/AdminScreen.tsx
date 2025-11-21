@@ -176,7 +176,7 @@ export const AdminScreen: React.FC<AdminScreenProps> = ({ onBack, onGoToMap }) =
     }
 
     // 2. CABEÇALHO
-    doc.setFillColor(0, 127, 240); // #E63121
+    doc.setFillColor(230, 49, 33); // #E63121
     doc.rect(0, 0, pageWidth, 40, 'F');
     
     // Adicionar Logo se carregou
