@@ -292,7 +292,7 @@ export const AdminScreen: React.FC<AdminScreenProps> = ({ onBack, onGoToMap }) =
       head: [['Data', 'Origem', 'Destino', 'Categoria', 'Valor', 'Status']],
       body: rideRows,
       theme: 'striped',
-      headStyles: { fillColor: [0, 127, 240] },
+      headStyles: { fillColor: [33, 49, 33] },
       styles: { fontSize: 8 },
       alternateRowStyles: { fillColor: [245, 247, 250] }
     });
