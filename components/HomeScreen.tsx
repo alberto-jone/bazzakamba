@@ -103,8 +103,8 @@ export const HomeScreen: React.FC<HomeScreenProps> = ({
             className="h-full w-72 bg-white shadow-2xl animate-in slide-in-from-left duration-300 flex flex-col"
             onClick={(e) => e.stopPropagation()}
           >
-            {/* Menu Header - Usando #007FF0 para não-admins */}
-            <div className={`${isAdmin ? 'bg-gray-900' : 'bg-[#007FF0]'} p-6 pt-12 text-white transition-colors`}>
+            {/* Menu Header - Usando #E63121 para não-admins */}
+            <div className={`${isAdmin ? 'bg-gray-900' : 'bg-[#E63121]'} p-6 pt-12 text-white transition-colors`}>
               <div className="flex justify-between items-center mb-6">
                 <div className="flex items-center gap-2">
                   <img src="/logo.jpg" alt="vamu" className="h-8 rounded" />
@@ -136,9 +136,9 @@ export const HomeScreen: React.FC<HomeScreenProps> = ({
                   <div className="text-[10px] font-bold text-gray-400 uppercase tracking-wider mb-2 px-2">Gestão</div>
                   <button
                     onClick={() => onNavigateTo('admin')}
-                    className="w-full flex items-center gap-3 p-3 rounded-xl bg-gray-50 hover:bg-[#007FF0]/10 text-gray-900 font-bold transition-colors border border-gray-200 hover:border-[#007FF0]/30 group"
+                    className="w-full flex items-center gap-3 p-3 rounded-xl bg-gray-50 hover:bg-[#E63121]/10 text-gray-900 font-bold transition-colors border border-gray-200 hover:border-[#E63121]/30 group"
                   >
-                    <LayoutDashboard className="w-5 h-5 text-gray-500 group-hover:text-[#007FF0]" />
+                    <LayoutDashboard className="w-5 h-5 text-gray-500 group-hover:text-[#E63121]" />
                     Dashboard {isDriver ? '(Motorista)' : '(Admin)'}
                   </button>
                 </div>
@@ -201,7 +201,7 @@ export const HomeScreen: React.FC<HomeScreenProps> = ({
         {/* Current Location (Fixed) */}
         <div className="bg-white p-3 rounded-lg shadow-md flex items-center gap-3 border border-gray-200">
           {/* Substituindo bg-blue-500 e ring-blue-100 */}
-          <div className="w-2 h-2 bg-[#007FF0] rounded-full ml-1 ring-4 ring-[#007FF0]/20"></div>
+          <div className="w-2 h-2 bg-[#E63121] rounded-full ml-1 ring-4 ring-[#E63121]/20"></div>
           <div className="flex-1">
             <form action="">
               <label htmlFor="LocalAtual" className="text-[10px] text-gray-400 font-bold uppercase tracking-wider">Local Atual</label>
@@ -240,7 +240,7 @@ export const HomeScreen: React.FC<HomeScreenProps> = ({
         )}
 
         {/* Destination Input - Black Background / White Text */}
-        <div className="bg-gray-900 p-3 rounded-lg shadow-xl flex items-center gap-3 relative border border-gray-800 transition-all focus-within:ring-2 focus-within:ring-[#007FF0]">
+        <div className="bg-gray-900 p-3 rounded-lg shadow-xl flex items-center gap-3 relative border border-gray-800 transition-all focus-within:ring-2 focus-within:ring-[#E63121]">
           <div className="w-2 h-2 bg-white rounded-full ml-1"></div>
           <div className="flex-1">
             <div className="text-[10px] text-gray-400 font-bold uppercase tracking-wider">Para onde vamos?</div>
@@ -289,7 +289,7 @@ export const HomeScreen: React.FC<HomeScreenProps> = ({
                 key={ride.id}
                 onClick={() => onSelectRide(ride)}
                 // Substituindo bg-blue-50
-                className={`flex flex-col items-center justify-center h-24 gap-2 p-2 rounded-xl transition-all duration-200 ${isSelected ? 'bg-[#007FF0]/10 scale-105 shadow-sm ring-1 ring-[#007FF0]' : 'hover:bg-gray-50 opacity-70 hover:opacity-100'
+                className={`flex flex-col items-center justify-center h-24 gap-2 p-2 rounded-xl transition-all duration-200 ${isSelected ? 'bg-[#E63121]/10 scale-105 shadow-sm ring-1 ring-[#E63121]' : 'hover:bg-gray-50 opacity-70 hover:opacity-100'
                   }`}
               >
                 <div className={`w-16 h-16 flex-1 flex items-center justify-center transition-all`}>
@@ -299,8 +299,8 @@ export const HomeScreen: React.FC<HomeScreenProps> = ({
                   <span className={`text-[10px] font-bold leading-tight ${isSelected ? 'text-black' : 'text-gray-500'}`}>
                     {ride.name.split(' ')[0]}
                   </span>
-                  <span className={`text-[10px] font-bold ${isSelected ? 'text-[#007FF0]' : 'text-gray-400'}`}>
-                    Desde {ride.price} kz
+                  <span className={`text-[9px] font-bold ${isSelected ? 'text-[#E63121]' : 'text-gray-400'}`}>
+                    Apartir {ride.price} kz
                   </span>
                 </div>
               </button>
@@ -311,7 +311,7 @@ export const HomeScreen: React.FC<HomeScreenProps> = ({
         <button
           onClick={() => onNext(destination)}
           disabled={!isValidSelection}
-          className={`w-full font-bold py-4 rounded-xl shadow-lg active:scale-[0.98] transition-all text-white text-lg flex items-center justify-center gap-2 ${isValidSelection ? 'bg-[#007FF0] hover:bg-[#0066CC]' : 'bg-gray-300 cursor-not-allowed'
+          className={`w-full font-bold py-4 rounded-xl shadow-lg active:scale-[0.98] transition-all text-white text-lg flex items-center justify-center gap-2 ${isValidSelection ? 'bg-[#E63121] hover:bg-[#0066CC]' : 'bg-gray-300 cursor-not-allowed'
             }`}
         >
           {isValidSelection ? (

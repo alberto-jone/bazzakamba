@@ -29,7 +29,7 @@ export const RIDE_OPTIONS: RideOption[] = [
     eta: '6 min',
     capacity: 4,
     type: 'car',
-    color: '#007FF0' // Blue
+    color: '#E63121' // Orange
   },
   {
     id: 'luxury',

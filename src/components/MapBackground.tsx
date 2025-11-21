@@ -16,7 +16,7 @@ export const MapBackground: React.FC<MapBackgroundProps> = ({
   userLocation, 
   rideStatus = 'home',
   vehicleType = 'car',
-  vehicleColor = '#007FF0'
+  vehicleColor = '#E63121'
 }) => {
   
   // --- ORGANIC PATH DEFINITIONS (Bezier Curves) ---
@@ -205,11 +205,11 @@ export const MapBackground: React.FC<MapBackgroundProps> = ({
 
         {/* --- PINS --- */}
         
-        {/* Pickup Pin (User) - Usando #007FF0 */}
+        {/* Pickup Pin (User) - Usando #E63121 */}
         {(userLocation && isPickingUp) && (
           <g transform="translate(200, 400)">
-             <circle r="30" fill="#007FF0" className="pulse-ring opacity-30" />
-             <circle r="12" fill="#007FF0" stroke="white" strokeWidth="3" />
+             <circle r="30" fill="#E63121" className="pulse-ring opacity-30" />
+             <circle r="12" fill="#E63121" stroke="white" strokeWidth="3" />
              {/* Floating Label */}
              <g transform="translate(0, -35)">
                 <rect x="-35" y="-20" width="70" height="20" rx="4" fill="white" stroke="#E5E7EB" />

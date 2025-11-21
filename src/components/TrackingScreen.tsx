@@ -113,11 +113,11 @@ export const TrackingScreen: React.FC<TrackingScreenProps> = ({ selectedRide, de
 
   const getStatusColor = () => {
     switch (status) {
-      case 'searching': return 'bg-[#007FF0]'; // Azul da marca
-      case 'pickup': return 'bg-[#007FF0]'; // Azul da marca
+      case 'searching': return 'bg-[#E63121]'; // Azul da marca
+      case 'pickup': return 'bg-[#E63121]'; // Azul da marca
       case 'arrived': return 'bg-green-500'; // Verde para sucesso imediato
-      case 'traveling': return 'bg-[#007FF0]'; // Azul da marca
-      default: return 'bg-[#007FF0]';
+      case 'traveling': return 'bg-[#E63121]'; // Azul da marca
+      default: return 'bg-[#E63121]';
     }
   };
 
@@ -147,7 +147,7 @@ export const TrackingScreen: React.FC<TrackingScreenProps> = ({ selectedRide, de
         {status !== 'searching' && !isChatOpen && (
           <button
             onClick={() => setIsChatOpen(true)}
-            className="absolute bottom-6 right-4 bg-white text-[#007FF0] p-3 rounded-full shadow-xl border border-gray-100 flex items-center gap-2 z-30 hover:bg-gray-50 active:scale-95 transition-all"
+            className="absolute bottom-6 right-4 bg-white text-[#E63121] p-3 rounded-full shadow-xl border border-gray-100 flex items-center gap-2 z-30 hover:bg-gray-50 active:scale-95 transition-all"
           >
             <MessageCircle className="w-6 h-6" />
             <span className="bg-red-500 text-white text-[10px] font-bold px-1.5 rounded-full absolute -top-1 -right-1">1</span>
@@ -185,7 +185,7 @@ export const TrackingScreen: React.FC<TrackingScreenProps> = ({ selectedRide, de
         {/* Progress Bar Line */}
         <div className="h-1 bg-gray-100 w-full">
           <div
-            className={`h-full transition-all duration-[2000ms] ease-linear ${status === 'arrived' ? 'bg-green-500' : 'bg-[#007FF0]'}`}
+            className={`h-full transition-all duration-[2000ms] ease-linear ${status === 'arrived' ? 'bg-green-500' : 'bg-[#E63121]'}`}
             style={{ width: getProgressWidth() }}
           ></div>
         </div>
@@ -230,7 +230,7 @@ export const TrackingScreen: React.FC<TrackingScreenProps> = ({ selectedRide, de
                     <div className="text-[10px] text-gray-400 font-bold uppercase tracking-wider mb-0.5">{MOCK_DRIVER.carModel}</div>
                     <div className="font-mono font-bold text-gray-900 text-sm">{MOCK_DRIVER.plate}</div>
                   </div>
-                  <span className="text-[10px] font-medium text-[#007FF0] mt-1 bg-[#007FF0]/10 px-2 py-0.5 rounded-full">{MOCK_DRIVER.carColor}</span>
+                  <span className="text-[10px] font-medium text-[#E63121] mt-1 bg-[#E63121]/10 px-2 py-0.5 rounded-full">{MOCK_DRIVER.carColor}</span>
                 </div>
               </div>
 
@@ -238,7 +238,7 @@ export const TrackingScreen: React.FC<TrackingScreenProps> = ({ selectedRide, de
               <div className="grid grid-cols-2 gap-3">
                 <button
                   onClick={handleCall}
-                  className="flex items-center justify-center gap-2 bg-[#007FF0]/10 hover:bg-[#007FF0]/20 text-[#007FF0] py-3.5 rounded-xl font-bold transition-all border border-[#007FF0]/20 active:scale-[0.98]"
+                  className="flex items-center justify-center gap-2 bg-[#E63121]/10 hover:bg-[#E63121]/20 text-[#E63121] py-3.5 rounded-xl font-bold transition-all border border-[#E63121]/20 active:scale-[0.98]"
                 >
                   <Phone className="w-5 h-5 fill-current" />
                   Ligar
@@ -253,7 +253,7 @@ export const TrackingScreen: React.FC<TrackingScreenProps> = ({ selectedRide, de
               <div className="flex justify-between items-center pt-4 border-t border-gray-100">
                 <div>
                   <div className="text-xs text-gray-400 font-bold uppercase">Pagamento</div>
-                  <div className="text-xl font-bold text-[#007FF0]">Kz {selectedRide.price.toLocaleString('pt-AO')}</div>
+                  <div className="text-xl font-bold text-[#E63121]">Kz {selectedRide.price.toLocaleString('pt-AO')}</div>
                 </div>
                 <button
                   onClick={onCancel}
@@ -270,8 +270,8 @@ export const TrackingScreen: React.FC<TrackingScreenProps> = ({ selectedRide, de
       {/* CHAT MODAL OVERLAY */}
       {isChatOpen && (
         <div className="absolute inset-0 z-50 bg-white flex flex-col animate-in slide-in-from-bottom-full duration-300">
-          {/* Chat Header - Agora azul #007FF0 */}
-          <div className="bg-[#007FF0] text-white p-4 pt-12 flex items-center justify-between shadow-md">
+          {/* Chat Header - Agora azul #E63121 */}
+          <div className="bg-[#E63121] text-white p-4 pt-12 flex items-center justify-between shadow-md">
             <div className="flex items-center gap-3">
               <img src={MOCK_DRIVER.image} alt={MOCK_DRIVER.name} className="w-8 h-8 rounded-full border border-white/20" />
               <div>
@@ -296,7 +296,7 @@ export const TrackingScreen: React.FC<TrackingScreenProps> = ({ selectedRide, de
             {messages.map((msg) => (
               <div key={msg.id} className={`flex ${msg.sender === 'user' ? 'justify-end' : 'justify-start'}`}>
                 <div className={`max-w-[80%] p-3 rounded-2xl text-sm shadow-sm ${msg.sender === 'user'
-                    ? 'bg-[#007FF0] text-white rounded-tr-none'
+                    ? 'bg-[#E63121] text-white rounded-tr-none'
                     : 'bg-white text-gray-800 rounded-tl-none border border-gray-100'
                   }`}>
                   {msg.text}
@@ -315,14 +315,14 @@ export const TrackingScreen: React.FC<TrackingScreenProps> = ({ selectedRide, de
               value={chatMessage}
               onChange={(e) => setChatMessage(e.target.value)}
               placeholder="Escrever mensagem..."
-              className="flex-1 bg-gray-100 rounded-full px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-[#007FF0]"
+              className="flex-1 bg-gray-100 rounded-full px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-[#E63121]"
               onKeyDown={(e) => e.key === 'Enter' && handleSendMessage()}
             />
             <button
               onClick={handleSendMessage}
               disabled={!chatMessage.trim()}
               title="Enviar mensagem"
-              className="p-3 bg-[#007FF0] text-white rounded-full disabled:opacity-50 hover:bg-[#0066CC] transition-colors shadow-sm"
+              className="p-3 bg-[#E63121] text-white rounded-full disabled:opacity-50 hover:bg-[#0066CC] transition-colors shadow-sm"
             >
               <Send className="w-4 h-4" />
             </button>

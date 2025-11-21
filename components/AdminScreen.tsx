@@ -54,14 +54,14 @@ const StatCard = ({ title, value, subtext, icon: Icon, colorClass }: any) => (
 );
 
 const TabButton = ({ active, label, icon: Icon, onClick }: any) => (
-  <button onClick={onClick} className={`flex items-center gap-3 px-4 py-3 rounded-xl transition-all w-full text-sm font-bold ${active ? 'bg-[#007FF0] text-white shadow-lg shadow-blue-200' : 'text-gray-500 hover:bg-gray-100'}`}>
+  <button onClick={onClick} className={`flex items-center gap-3 px-4 py-3 rounded-xl transition-all w-full text-sm font-bold ${active ? 'bg-[#E63121] text-white shadow-lg shadow-red-200' : 'text-gray-500 hover:bg-gray-100'}`}>
     <Icon className="w-4 h-4" />
     <span>{label}</span>
   </button>
 );
 
 const StatusBadge = ({ status }: { status: string }) => {
-  const styles: any = { completed: "bg-green-100 text-green-700 border-green-200", cancelled: "bg-red-100 text-red-700 border-red-200", ongoing: "bg-blue-100 text-blue-700 border-blue-200", default: "bg-gray-100 text-gray-600 border-gray-200" };
+  const styles: any = { completed: "bg-green-100 text-green-700 border-green-200", cancelled: "bg-red-100 text-red-700 border-red-200", ongoing: "bg-red-100 text-red-700 border-red-200", default: "bg-gray-100 text-gray-600 border-gray-200" };
   const key = status as keyof typeof styles || 'default';
   return <span className={`text-[9px] px-2 py-0.5 rounded-full font-bold uppercase border ${styles[key]}`}>{status === 'completed' ? 'Concluída' : status === 'ongoing' ? 'Em Curso' : status}</span>;
 };
@@ -176,7 +176,7 @@ export const AdminScreen: React.FC<AdminScreenProps> = ({ onBack, onGoToMap }) =
     }
 
     // 2. CABEÇALHO
-    doc.setFillColor(0, 127, 240); // #007FF0
+    doc.setFillColor(0, 127, 240); // #E63121
     doc.rect(0, 0, pageWidth, 40, 'F');
     
     // Adicionar Logo se carregou
@@ -367,7 +367,7 @@ export const AdminScreen: React.FC<AdminScreenProps> = ({ onBack, onGoToMap }) =
         </div>
         <div className="p-4 border-t border-gray-100 bg-gray-50">
           <div className="flex items-center gap-3 mb-3">
-            <div className="w-9 h-9 rounded-full bg-[#007FF0] flex items-center justify-center text-white font-bold text-sm">{currentUser.name.charAt(0)}</div>
+            <div className="w-9 h-9 rounded-full bg-[#E63121] flex items-center justify-center text-white font-bold text-sm">{currentUser.name.charAt(0)}</div>
             <div className="overflow-hidden"><p className="text-sm font-bold text-gray-900 truncate">{currentUser.name}</p><p className="text-[10px] text-gray-500 uppercase font-bold">{currentUser.role}</p></div>
           </div>
           <button onClick={onBack} className="w-full flex items-center justify-center gap-2 bg-white border border-gray-200 text-red-500 py-2 rounded-lg text-xs font-bold hover:bg-red-50 transition-colors"><LogOut className="w-3 h-3" /> Sair</button>
@@ -386,33 +386,33 @@ export const AdminScreen: React.FC<AdminScreenProps> = ({ onBack, onGoToMap }) =
                  <Printer className="w-4 h-4" /> <span className="hidden sm:inline">Baixar Relatório</span>
                </button>
              )}
-             <button onClick={loadData} disabled={isSyncing} className={`p-2 rounded-lg transition-colors ${isSyncing ? 'bg-gray-100 text-blue-500' : 'text-gray-500 hover:bg-gray-100'}`} title="Sincronizar Dados"><RefreshCcw className={`w-5 h-5 ${isSyncing ? 'animate-spin' : ''}`} /></button>
+             <button onClick={loadData} disabled={isSyncing} className={`p-2 rounded-lg transition-colors ${isSyncing ? 'bg-gray-100 text-red-500' : 'text-gray-500 hover:bg-gray-100'}`} title="Sincronizar Dados"><RefreshCcw className={`w-5 h-5 ${isSyncing ? 'animate-spin' : ''}`} /></button>
              {isDriver && <button onClick={onGoToMap} className="flex items-center gap-2 bg-green-600 text-white px-3 py-2 rounded-lg font-bold text-xs shadow hover:bg-green-700"><MapPin className="w-3 h-3" /> <span className="hidden sm:inline">IR PARA O MAPA</span></button>}
-             {isAdmin && <button onClick={() => setShowDriverForm(true)} className="flex items-center gap-2 bg-[#007FF0] text-white px-3 py-2 rounded-lg font-bold text-xs shadow hover:bg-[#0066CC]"><UserPlus className="w-3 h-3" /> <span className="hidden sm:inline">Novo Motorista</span></button>}
+             {isAdmin && <button onClick={() => setShowDriverForm(true)} className="flex items-center gap-2 bg-[#E63121] text-white px-3 py-2 rounded-lg font-bold text-xs shadow hover:bg-[#0066CC]"><UserPlus className="w-3 h-3" /> <span className="hidden sm:inline">Novo Motorista</span></button>}
           </div>
         </header>
 
         <div className="flex-1 overflow-y-auto p-4 pb-20 md:p-8 scroll-smooth">
-          {isSyncing && users.length === 0 && <div className="flex flex-col items-center justify-center h-64"><Loader className="w-8 h-8 text-[#007FF0] animate-spin mb-4" /><p className="text-sm text-gray-500 font-bold">Baixando dados do Supabase...</p></div>}
+          {isSyncing && users.length === 0 && <div className="flex flex-col items-center justify-center h-64"><Loader className="w-8 h-8 text-[#E63121] animate-spin mb-4" /><p className="text-sm text-gray-500 font-bold">Baixando dados do Supabase...</p></div>}
           
           {/* OVERVIEW */}
           {activeTab === 'overview' && (
             <div className="space-y-6 animate-in fade-in slide-in-from-bottom-4">
               <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 md:gap-4">
-                <StatCard title="Viagens Totais" value={stats.totalRides} subtext={`${stats.completedCount} concluídas`} icon={Activity} colorClass="bg-blue-500" />
-                <StatCard title="Passageiros" value={stats.totalPassengers} subtext="Cadastrados" icon={Users} colorClass="bg-purple-500" />
+                <StatCard title="Viagens Totais" value={stats.totalRides} subtext={`${stats.completedCount} concluídas`} icon={Activity} colorClass="bg-red-500" />
+                <StatCard title="Passageiros" value={stats.totalPassengers} subtext="Cadastrados" icon={Users} colorClass="bg-red-500" />
                 <StatCard title="Receita Estimada" value={formatKz(stats.revenue)} subtext="Estimativa Total" icon={DollarSign} colorClass="bg-green-500" />
                 <StatCard title="Nota App" value={stats.avgAppRating.toFixed(1)} subtext="Avaliação Média" icon={Smartphone} colorClass="bg-pink-500" />
               </div>
               <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
                 <div className="lg:col-span-2 bg-white rounded-2xl shadow-sm border border-gray-100 p-5">
-                   <h3 className="font-bold text-gray-800 text-sm uppercase flex items-center gap-2 mb-4"><History className="w-4 h-4 text-[#007FF0]" /> Últimas Viagens</h3>
+                   <h3 className="font-bold text-gray-800 text-sm uppercase flex items-center gap-2 mb-4"><History className="w-4 h-4 text-[#E63121]" /> Últimas Viagens</h3>
                    <div className="overflow-x-auto"><table className="w-full text-left"><thead className="bg-gray-50 text-[10px] uppercase text-gray-500"><tr><th className="p-3">Rota</th><th className="p-3">Tipo</th><th className="p-3 text-right">Valor</th><th className="p-3 text-right">Status</th></tr></thead><tbody className="divide-y divide-gray-50">{rides.length === 0 ? <tr><td colSpan={4} className="p-4 text-center text-xs text-gray-400">Sem dados.</td></tr> : rides.slice().reverse().slice(0, 6).map(ride => { const option = RIDE_OPTIONS.find(o => o.id === ride.rideType); return (<tr key={ride.id} className="hover:bg-gray-50"><td className="p-3"><div className="flex flex-col gap-1"><span className="text-[10px] text-gray-500">De: {ride.origin || 'N/A'}</span><span className="text-xs font-bold text-gray-800">Para: {ride.destination}</span></div></td><td className="p-3 text-xs text-gray-600 capitalize">{option?.name || ride.rideType}</td><td className="p-3 text-right font-mono text-xs font-bold text-gray-700">{option ? formatKz(option.price) : '-'}</td><td className="p-3 text-right"><StatusBadge status={ride.completedAt ? 'completed' : 'ongoing'} /></td></tr>)})}</tbody></table></div>
                 </div>
                 <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-5 flex flex-col">
-                   <h3 className="font-bold text-gray-800 text-sm uppercase flex items-center gap-2 mb-4"><Users className="w-4 h-4 text-purple-500" /> Passageiros Recentes</h3>
+                   <h3 className="font-bold text-gray-800 text-sm uppercase flex items-center gap-2 mb-4"><Users className="w-4 h-4 text-red-500" /> Passageiros Recentes</h3>
                    <div className="flex-1 overflow-y-auto pr-2 custom-scrollbar space-y-3">
-                     {users.filter(u => u.role === 'passenger').length === 0 ? <p className="text-xs text-gray-400 text-center">Sem passageiros.</p> : users.filter(u => u.role === 'passenger').slice().reverse().slice(0, 8).map(u => (<div key={u.id} className="flex items-center gap-3 p-2 hover:bg-purple-50 rounded-lg transition-colors"><div className="w-8 h-8 bg-purple-100 text-purple-600 rounded-full flex items-center justify-center font-bold text-xs">{u.name.charAt(0)}</div><div className="overflow-hidden"><p className="text-xs font-bold text-gray-800 truncate">{u.name}</p><p className="text-[10px] text-gray-400">{u.email || u.phone}</p></div></div>))}
+                     {users.filter(u => u.role === 'passenger').length === 0 ? <p className="text-xs text-gray-400 text-center">Sem passageiros.</p> : users.filter(u => u.role === 'passenger').slice().reverse().slice(0, 8).map(u => (<div key={u.id} className="flex items-center gap-3 p-2 hover:bg-red-50 rounded-lg transition-colors"><div className="w-8 h-8 bg-red-100 text-red-600 rounded-full flex items-center justify-center font-bold text-xs">{u.name.charAt(0)}</div><div className="overflow-hidden"><p className="text-xs font-bold text-gray-800 truncate">{u.name}</p><p className="text-[10px] text-gray-400">{u.email || u.phone}</p></div></div>))}
                    </div>
                 </div>
               </div>
@@ -425,26 +425,26 @@ export const AdminScreen: React.FC<AdminScreenProps> = ({ onBack, onGoToMap }) =
               <div className="p-5 border-b border-gray-100 flex flex-col sm:flex-row justify-between sm:items-center gap-4">
                 <div><h3 className="font-bold text-lg text-gray-800">Base de Usuários</h3><p className="text-xs text-gray-500">{filteredUsers.length} registros</p></div>
                 <div className="flex bg-gray-100 p-1 rounded-lg">
-                  <button onClick={() => setUserFilter('all')} className={`px-4 py-1.5 text-xs font-bold rounded-md ${userFilter === 'all' ? 'bg-white text-[#007FF0] shadow-sm' : 'text-gray-500'}`}>Todos</button>
-                  <button onClick={() => setUserFilter('passenger')} className={`px-4 py-1.5 text-xs font-bold rounded-md ${userFilter === 'passenger' ? 'bg-white text-purple-600 shadow-sm' : 'text-gray-500'}`}>Passageiros</button>
-                  <button onClick={() => setUserFilter('driver')} className={`px-4 py-1.5 text-xs font-bold rounded-md ${userFilter === 'driver' ? 'bg-white text-blue-600 shadow-sm' : 'text-gray-500'}`}>Motoristas</button>
+                  <button onClick={() => setUserFilter('all')} className={`px-4 py-1.5 text-xs font-bold rounded-md ${userFilter === 'all' ? 'bg-white text-[#E63121] shadow-sm' : 'text-gray-500'}`}>Todos</button>
+                  <button onClick={() => setUserFilter('passenger')} className={`px-4 py-1.5 text-xs font-bold rounded-md ${userFilter === 'passenger' ? 'bg-white text-red-600 shadow-sm' : 'text-gray-500'}`}>Passageiros</button>
+                  <button onClick={() => setUserFilter('driver')} className={`px-4 py-1.5 text-xs font-bold rounded-md ${userFilter === 'driver' ? 'bg-white text-red-600 shadow-sm' : 'text-gray-500'}`}>Motoristas</button>
                 </div>
               </div>
-              <div className="overflow-x-auto"><table className="w-full text-left min-w-[600px]"><thead className="bg-gray-50 text-gray-500 font-bold text-[10px] uppercase"><tr><th className="p-4">Nome</th><th className="p-4">Função</th><th className="p-4">Contato</th><th className="p-4">Matrícula</th><th className="p-4 text-right">Registro</th></tr></thead><tbody className="divide-y divide-gray-50 text-sm">{filteredUsers.map(user => (<tr key={user.id} className="hover:bg-blue-50/30"><td className="p-4 font-bold text-gray-800">{user.name}</td><td className="p-4"><span className={`px-2 py-1 rounded text-[10px] font-bold uppercase border ${user.role === 'driver' ? 'bg-blue-50 text-blue-700 border-blue-100' : user.role === 'passenger' ? 'bg-purple-50 text-purple-700 border-purple-100' : 'bg-gray-100'}`}>{user.role}</span></td><td className="p-4 text-gray-600 text-xs">{user.email || user.phone}</td><td className="p-4 text-gray-400 text-xs font-mono">{user.plate || '-'}</td><td className="p-4 text-right text-gray-400 text-xs">{new Date(user.registeredAt).toLocaleDateString()}</td></tr>))}</tbody></table></div>
+              <div className="overflow-x-auto"><table className="w-full text-left min-w-[600px]"><thead className="bg-gray-50 text-gray-500 font-bold text-[10px] uppercase"><tr><th className="p-4">Nome</th><th className="p-4">Função</th><th className="p-4">Contato</th><th className="p-4">Matrícula</th><th className="p-4 text-right">Registro</th></tr></thead><tbody className="divide-y divide-gray-50 text-sm">{filteredUsers.map(user => (<tr key={user.id} className="hover:bg-red-50/30"><td className="p-4 font-bold text-gray-800">{user.name}</td><td className="p-4"><span className={`px-2 py-1 rounded text-[10px] font-bold uppercase border ${user.role === 'driver' ? 'bg-red-50 text-red-700 border-red-100' : user.role === 'passenger' ? 'bg-red-50 text-red-700 border-red-100' : 'bg-gray-100'}`}>{user.role}</span></td><td className="p-4 text-gray-600 text-xs">{user.email || user.phone}</td><td className="p-4 text-gray-400 text-xs font-mono">{user.plate || '-'}</td><td className="p-4 text-right text-gray-400 text-xs">{new Date(user.registeredAt).toLocaleDateString()}</td></tr>))}</tbody></table></div>
             </div>
           )}
 
           {/* DRIVERS */}
           {activeTab === 'drivers' && isAdmin && (
             <div className="space-y-6 animate-in fade-in">
-              <div className="bg-blue-900 p-6 rounded-2xl text-white shadow-lg flex justify-between items-center">
-                <div><h2 className="text-xl font-bold">Frota</h2><p className="text-blue-200 text-xs mt-1">{users.filter(u => u.role === 'driver').length} motoristas.</p></div>
-                <button onClick={() => setShowDriverForm(true)} className="bg-white text-blue-900 px-4 py-2 rounded-lg text-xs font-bold shadow">+ Cadastrar</button>
+              <div className="bg-red-900 p-6 rounded-2xl text-white shadow-lg flex justify-between items-center">
+                <div><h2 className="text-xl font-bold">Frota</h2><p className="text-red-200 text-xs mt-1">{users.filter(u => u.role === 'driver').length} motoristas.</p></div>
+                <button onClick={() => setShowDriverForm(true)} className="bg-white text-red-900 px-4 py-2 rounded-lg text-xs font-bold shadow">+ Cadastrar</button>
               </div>
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                 {users.filter(u => u.role === 'driver').map(driver => (
                   <div key={driver.id} className="bg-white p-5 rounded-2xl border border-gray-100 shadow-sm hover:shadow-md transition-all">
-                    <div className="flex items-center gap-3 mb-4"><div className="w-10 h-10 bg-blue-50 rounded-full flex items-center justify-center text-[#007FF0]"><Car className="w-5 h-5" /></div><div><h4 className="font-bold text-gray-900 text-sm">{driver.name}</h4><p className="text-[10px] text-gray-500 font-mono">{driver.plate || 'S/ Matrícula'}</p></div></div>
+                    <div className="flex items-center gap-3 mb-4"><div className="w-10 h-10 bg-red-50 rounded-full flex items-center justify-center text-[#E63121]"><Car className="w-5 h-5" /></div><div><h4 className="font-bold text-gray-900 text-sm">{driver.name}</h4><p className="text-[10px] text-gray-500 font-mono">{driver.plate || 'S/ Matrícula'}</p></div></div>
                     <div className="bg-gray-50 p-3 rounded-xl mb-3"><div className="flex justify-between items-center mb-1"><span className="text-[10px] font-bold text-gray-500 uppercase">Desempenho</span><StarDisplay rating={stats.avgDriverRating} /></div><div className="w-full bg-gray-200 rounded-full h-1.5 mt-2"><div className="bg-yellow-400 h-1.5 rounded-full" style={{ width: `${(stats.avgDriverRating / 5) * 100}%` }}></div></div></div>
                     <div className="flex justify-between items-center text-[10px] text-gray-500 border-t border-gray-100 pt-3"><span className="flex items-center gap-1"><Smartphone className="w-3 h-3" /> {driver.phone}</span><span className="font-bold text-green-600 bg-green-50 px-2 py-0.5 rounded-full">ATIVO</span></div>
                   </div>
@@ -477,8 +477,8 @@ export const AdminScreen: React.FC<AdminScreenProps> = ({ onBack, onGoToMap }) =
               <input required value={newDriver.name} onChange={e => setNewDriver({ ...newDriver, name: e.target.value })} className="w-full p-3 bg-gray-50 rounded-xl border border-gray-200 text-sm outline-none" placeholder="Nome Completo" />
               <div className="grid grid-cols-2 gap-3"><input required type="tel" value={newDriver.phone} onChange={e => setNewDriver({ ...newDriver, phone: e.target.value })} className="w-full p-3 bg-gray-50 rounded-xl border border-gray-200 text-sm outline-none" placeholder="Telefone" /><input required value={newDriver.plate} onChange={e => setNewDriver({ ...newDriver, plate: e.target.value })} className="w-full p-3 bg-gray-50 rounded-xl border border-gray-200 text-sm outline-none" placeholder="Matrícula" /></div>
               <input required type="email" value={newDriver.email} onChange={e => setNewDriver({ ...newDriver, email: e.target.value })} className="w-full p-3 bg-gray-50 rounded-xl border border-gray-200 text-sm outline-none" placeholder="Email" />
-              <div className="bg-blue-50 p-3 rounded-lg text-blue-800 text-[10px] mt-2">Senha padrão: <span className="font-mono font-bold">vamu@2025</span></div>
-              <button type="submit" className="w-full bg-[#007FF0] text-white font-bold py-3 rounded-xl hover:bg-[#0066CC] shadow-lg mt-4">Confirmar Cadastro</button>
+              <div className="bg-red-50 p-3 rounded-lg text-red-800 text-[10px] mt-2">Senha padrão: <span className="font-mono font-bold">vamu@2025</span></div>
+              <button type="submit" className="w-full bg-[#E63121] text-white font-bold py-3 rounded-xl hover:bg-[#0066CC] shadow-lg mt-4">Confirmar Cadastro</button>
             </form>
           </div>
         </div>

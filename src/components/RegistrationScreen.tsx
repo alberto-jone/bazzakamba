@@ -58,7 +58,7 @@ export const RegistrationScreen: React.FC<RegistrationScreenProps> = ({ onRegist
         <button 
           onClick={() => { setMode('register'); setError(''); }}
           className={`flex-1 py-2.5 text-xs font-bold rounded-lg transition-all flex items-center justify-center gap-2 ${
-            mode === 'register' ? 'bg-white shadow-sm text-[#007FF0]' : 'text-gray-400'
+            mode === 'register' ? 'bg-white shadow-sm text-[#E63121]' : 'text-gray-400'
           }`}
         >
           <UserCircle className="w-4 h-4" />
@@ -84,7 +84,7 @@ export const RegistrationScreen: React.FC<RegistrationScreenProps> = ({ onRegist
                 COLOQUE SUA IMAGEM AQUI:
                 <img src="/caminho/para/logo.png" alt="Bazza Kamba" className="h-12" />
               */}
-              <h1 className="text-3xl font-black tracking-tighter text-[#007FF0]">
+              <h1 className="text-3xl font-black tracking-tighter text-[#E63121]">
                 VAMU
               </h1>
            </div>
@@ -105,7 +105,7 @@ export const RegistrationScreen: React.FC<RegistrationScreenProps> = ({ onRegist
                 required
                 type="text"
                 placeholder="Ex: João Paulo"
-                className="w-full p-4 bg-gray-50 rounded-xl border border-gray-200 focus:border-[#007FF0] focus:bg-white outline-none transition-all text-sm font-bold text-gray-900 placeholder-gray-400"
+                className="w-full p-4 bg-gray-50 rounded-xl border border-gray-200 focus:border-[#E63121] focus:bg-white outline-none transition-all text-sm font-bold text-gray-900 placeholder-gray-400"
                 value={registerData.name}
                 onChange={e => setRegisterData({...registerData, name: e.target.value})}
               />
@@ -117,7 +117,7 @@ export const RegistrationScreen: React.FC<RegistrationScreenProps> = ({ onRegist
                 required
                 type="tel"
                 placeholder="9XX XXX XXX"
-                className="w-full p-4 bg-gray-50 rounded-xl border border-gray-200 focus:border-[#007FF0] focus:bg-white outline-none transition-all text-sm font-bold text-gray-900 placeholder-gray-400"
+                className="w-full p-4 bg-gray-50 rounded-xl border border-gray-200 focus:border-[#E63121] focus:bg-white outline-none transition-all text-sm font-bold text-gray-900 placeholder-gray-400"
                 value={registerData.phone}
                 onChange={e => setRegisterData({...registerData, phone: e.target.value})}
               />
@@ -126,7 +126,7 @@ export const RegistrationScreen: React.FC<RegistrationScreenProps> = ({ onRegist
             <div className="mt-auto pt-4">
               <button 
                 type="submit"
-                className="w-full bg-[#007FF0] hover:bg-[#0066CC] text-white font-bold py-4 rounded-xl shadow-lg active:scale-[0.98] transition-all flex items-center justify-center gap-2"
+                className="w-full bg-[#E63121] hover:bg-[#0066CC] text-white font-bold py-4 rounded-xl shadow-lg active:scale-[0.98] transition-all flex items-center justify-center gap-2"
               >
                 Criar Conta e Entrar <ArrowRight className="w-4 h-4" />
               </button>

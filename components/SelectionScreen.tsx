@@ -21,7 +21,7 @@ export const SelectionScreen: React.FC<SelectionScreenProps> = ({
   return (
     <div className="h-full w-full bg-gray-50 flex flex-col">
       {/* Header */}
-      <div className="bg-[#007FF0] text-white p-6 pt-12 pb-8 rounded-b-3xl shadow-lg z-10">
+      <div className="bg-[#E63121] text-white p-6 pt-12 pb-8 rounded-b-3xl shadow-lg z-10">
         <button onClick={onBack} className="flex items-center gap-2 text-sm font-medium opacity-90 hover:opacity-100 mb-4">
           <ArrowLeft className="w-4 h-4" /> Voltar
         </button>
@@ -37,7 +37,7 @@ export const SelectionScreen: React.FC<SelectionScreenProps> = ({
             onClick={() => onSelect(ride)}
             className={`relative p-4 rounded-2xl border-2 transition-all cursor-pointer flex items-center gap-4 ${
               selectedRide.id === ride.id 
-                ? 'border-[#007FF0] bg-[#007FF0]/5 shadow-xl scale-[1.02]' 
+                ? 'border-[#E63121] bg-[#E63121]/5 shadow-xl scale-[1.02]' 
                 : 'border-transparent bg-white shadow-sm hover:shadow-md opacity-80'
             }`}
           >
@@ -51,11 +51,11 @@ export const SelectionScreen: React.FC<SelectionScreenProps> = ({
               <p className="text-xs text-gray-500">{ride.eta} • {ride.capacity} {ride.capacity === 1 ? 'lugar' : 'lugares'}</p>
             </div>
             <div className="text-right">
-               <span className="block font-bold text-lg whitespace-nowrap text-[#007FF0]">Kz {ride.price.toLocaleString('pt-AO')}</span>
+               <span className="block font-bold text-lg whitespace-nowrap text-[#E63121]">Kz {ride.price.toLocaleString('pt-AO')}</span>
             </div>
             {selectedRide.id === ride.id && (
                 <div className="absolute top-4 right-4">
-                    <div className="w-4 h-4 bg-[#007FF0] rounded-full border-2 border-white shadow-sm"></div>
+                    <div className="w-4 h-4 bg-[#E63121] rounded-full border-2 border-white shadow-sm"></div>
                 </div>
             )}
           </div>
@@ -66,7 +66,7 @@ export const SelectionScreen: React.FC<SelectionScreenProps> = ({
       <div className="p-6 bg-white border-t border-gray-100">
         <button 
           onClick={onConfirm}
-          className="w-full bg-[#007FF0] hover:bg-[#0066CC] text-white font-bold py-4 rounded-xl shadow-lg active:scale-[0.98] transition-transform"
+          className="w-full bg-[#E63121] hover:bg-[#0066CC] text-white font-bold py-4 rounded-xl shadow-lg active:scale-[0.98] transition-transform"
         >
           Confirmar {selectedRide.name}
         </button>

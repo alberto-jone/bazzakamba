@@ -75,7 +75,7 @@ export const DriverModeScreen: React.FC<DriverModeScreenProps> = ({ onExit }) =>
                 <ArrowLeft className="w-5 h-5 text-gray-900" />
             </button>
             <div className={`px-4 py-1.5 rounded-full font-bold text-xs shadow-lg uppercase tracking-wider ${
-                status === 'idle' ? 'bg-[#007FF0] text-white animate-pulse' : 
+                status === 'idle' ? 'bg-[#E63121] text-white animate-pulse' : 
                 status === 'request_received' ? 'bg-yellow-500 text-black animate-bounce' :
                 'bg-green-500 text-white'
             }`}>
@@ -98,7 +98,7 @@ export const DriverModeScreen: React.FC<DriverModeScreenProps> = ({ onExit }) =>
          <MapBackground 
             userLocation={status !== 'idle'} 
             rideStatus={getMapRideStatus()}
-            vehicleColor="#007FF0" // O carro do motorista é azul
+            vehicleColor="#E63121" // O carro do motorista é azul
             vehicleType="car"
          />
       </div>
@@ -110,7 +110,7 @@ export const DriverModeScreen: React.FC<DriverModeScreenProps> = ({ onExit }) =>
          <div className="absolute bottom-0 left-0 right-0 bg-white rounded-t-3xl p-6 shadow-[0_-10px_50px_rgba(0,0,0,0.3)] z-50 animate-in slide-in-from-bottom duration-300">
             <div className="flex justify-between items-start mb-4">
                 <div>
-                    <h2 className="text-2xl font-bold text-[#007FF0]">Kz 3.500</h2>
+                    <h2 className="text-2xl font-bold text-[#E63121]">Kz 3.500</h2>
                     <p className="text-sm text-gray-500">Standard Ride • 2.5 km</p>
                 </div>
                 <div className="bg-gray-100 px-3 py-1 rounded-lg font-mono text-lg font-bold text-gray-700">
@@ -120,7 +120,7 @@ export const DriverModeScreen: React.FC<DriverModeScreenProps> = ({ onExit }) =>
             
             <div className="space-y-4 mb-6">
                 <div className="flex items-center gap-3">
-                    <div className="w-2 h-2 bg-[#007FF0] rounded-full"></div>
+                    <div className="w-2 h-2 bg-[#E63121] rounded-full"></div>
                     <span className="text-sm font-medium text-gray-800">Cine Caxito (3 min)</span>
                 </div>
                 <div className="flex items-center gap-3">
@@ -133,7 +133,7 @@ export const DriverModeScreen: React.FC<DriverModeScreenProps> = ({ onExit }) =>
                 <button onClick={handleDecline} className="flex-1 bg-gray-200 rounded-xl font-bold text-gray-600 hover:bg-gray-300">
                     Recusar
                 </button>
-                <button onClick={handleAccept} className="flex-[2] bg-[#007FF0] rounded-xl font-bold text-white hover:bg-[#0066CC] shadow-lg animate-pulse">
+                <button onClick={handleAccept} className="flex-[2] bg-[#E63121] rounded-xl font-bold text-white hover:bg-[#0066CC] shadow-lg animate-pulse">
                     Aceitar Corrida
                 </button>
             </div>
@@ -160,7 +160,7 @@ export const DriverModeScreen: React.FC<DriverModeScreenProps> = ({ onExit }) =>
 
             {status === 'pickup' ? (
                 <div className="space-y-3">
-                    <div className="bg-[#007FF0]/10 text-[#007FF0] p-3 rounded-xl flex items-center gap-3">
+                    <div className="bg-[#E63121]/10 text-[#E63121] p-3 rounded-xl flex items-center gap-3">
                         <Navigation className="w-5 h-5" />
                         <span className="text-sm font-bold">Siga para o ponto de embarque</span>
                     </div>
@@ -168,7 +168,7 @@ export const DriverModeScreen: React.FC<DriverModeScreenProps> = ({ onExit }) =>
                         <button onClick={handleCancel} className="flex-1 py-3 text-red-500 font-bold text-sm bg-red-50 rounded-xl">
                             Cancelar
                         </button>
-                        <button onClick={handleArrived} className="flex-[2] bg-[#007FF0] text-white font-bold py-3 rounded-xl shadow-lg">
+                        <button onClick={handleArrived} className="flex-[2] bg-[#E63121] text-white font-bold py-3 rounded-xl shadow-lg">
                             Cheguei
                         </button>
                     </div>
@@ -183,7 +183,7 @@ export const DriverModeScreen: React.FC<DriverModeScreenProps> = ({ onExit }) =>
                          <button onClick={handleCancel} className="flex-1 py-3 text-red-500 font-bold text-sm bg-red-50 rounded-xl">
                             Cancelar
                         </button>
-                        <button onClick={handleStartTrip} className="flex-[2] bg-[#007FF0] text-white font-bold py-3 rounded-xl shadow-lg animate-pulse">
+                        <button onClick={handleStartTrip} className="flex-[2] bg-[#E63121] text-white font-bold py-3 rounded-xl shadow-lg animate-pulse">
                             Iniciar Viagem
                         </button>
                     </div>
@@ -218,7 +218,7 @@ export const DriverModeScreen: React.FC<DriverModeScreenProps> = ({ onExit }) =>
 
       {/* 4. CONCLUÍDO */}
       {status === 'completed' && (
-           <div className="absolute inset-0 z-50 bg-[#007FF0] flex flex-col items-center justify-center text-white animate-in fade-in">
+           <div className="absolute inset-0 z-50 bg-[#E63121] flex flex-col items-center justify-center text-white animate-in fade-in">
                <CheckCircle className="w-24 h-24 mb-6 text-white" />
                <h2 className="text-3xl font-bold">Viagem Finalizada!</h2>
                <p className="text-xl mt-2 opacity-90">+ Kz 3.500</p>

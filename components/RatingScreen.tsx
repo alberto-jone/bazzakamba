@@ -51,7 +51,7 @@ export const RatingScreen: React.FC<RatingScreenProps> = ({ rating, setRating, o
             >
               <Star
                 className={`w-10 h-10 ${star <= (hoveredStar || rating)
-                    ? 'fill-[#007FF0] text-[#007FF0]'
+                    ? 'fill-[#E63121] text-[#E63121]'
                     : 'text-gray-300'
                   }`}
               />
@@ -76,7 +76,7 @@ export const RatingScreen: React.FC<RatingScreenProps> = ({ rating, setRating, o
           onClick={handleSubmit}
           disabled={rating === 0}
           className={`px-8 py-3 rounded-xl font-bold shadow-lg transition-all ${rating > 0
-              ? 'bg-[#007FF0] hover:bg-[#0066CC] text-white opacity-100'
+              ? 'bg-[#E63121] hover:bg-[#0066CC] text-white opacity-100'
               : 'bg-gray-200 text-gray-400 cursor-not-allowed'
             }`}
         >

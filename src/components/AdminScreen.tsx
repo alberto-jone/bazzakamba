@@ -54,7 +54,7 @@ export const AdminScreen: React.FC<AdminScreenProps> = ({ onBack, onGoToMap }) =
         <p className="text-gray-500 mb-8 mt-2 max-w-[250px]">Esta área é restrita para administradores e motoristas.</p>
         <button
           onClick={onBack}
-          className="bg-[#007FF0] text-white font-bold py-3 px-8 rounded-xl shadow-lg active:scale-95 transition-transform"
+          className="bg-[#E63121] text-white font-bold py-3 px-8 rounded-xl shadow-lg active:scale-95 transition-transform"
         >
           Voltar ao Início
         </button>
@@ -110,29 +110,29 @@ export const AdminScreen: React.FC<AdminScreenProps> = ({ onBack, onGoToMap }) =
               <input
                 required placeholder="Nome do Motorista"
                 value={newDriver.name} onChange={e => setNewDriver({ ...newDriver, name: e.target.value })}
-                className="w-full p-3 bg-gray-50 rounded-lg border border-gray-200 text-sm text-gray-900 font-medium focus:border-[#007FF0] outline-none"
+                className="w-full p-3 bg-gray-50 rounded-lg border border-gray-200 text-sm text-gray-900 font-medium focus:border-[#E63121] outline-none"
               />
               <input
                 required placeholder="Email" type="email"
                 value={newDriver.email} onChange={e => setNewDriver({ ...newDriver, email: e.target.value })}
-                className="w-full p-3 bg-gray-50 rounded-lg border border-gray-200 text-sm text-gray-900 font-medium focus:border-[#007FF0] outline-none"
+                className="w-full p-3 bg-gray-50 rounded-lg border border-gray-200 text-sm text-gray-900 font-medium focus:border-[#E63121] outline-none"
               />
               <input
                 required placeholder="Telefone" type="tel"
                 value={newDriver.phone} onChange={e => setNewDriver({ ...newDriver, phone: e.target.value })}
-                className="w-full p-3 bg-gray-50 rounded-lg border border-gray-200 text-sm text-gray-900 font-medium focus:border-[#007FF0] outline-none"
+                className="w-full p-3 bg-gray-50 rounded-lg border border-gray-200 text-sm text-gray-900 font-medium focus:border-[#E63121] outline-none"
               />
               <input
                 required placeholder="Matrícula do Carro"
                 value={newDriver.plate} onChange={e => setNewDriver({ ...newDriver, plate: e.target.value })}
-                className="w-full p-3 bg-gray-50 rounded-lg border border-gray-200 text-sm text-gray-900 font-medium focus:border-[#007FF0] outline-none"
+                className="w-full p-3 bg-gray-50 rounded-lg border border-gray-200 text-sm text-gray-900 font-medium focus:border-[#E63121] outline-none"
               />
 
               <div className="text-[10px] text-gray-500 mt-2 mb-4">
                 * A senha padrão será: <span className="font-mono font-bold text-gray-800">vamu@2025</span>
               </div>
 
-              <button type="submit" className="w-full bg-[#007FF0] text-white font-bold py-3 rounded-xl hover:bg-[#0066CC] shadow-lg">
+              <button type="submit" className="w-full bg-[#E63121] text-white font-bold py-3 rounded-xl hover:bg-[#0066CC] shadow-lg">
                 Cadastrar
               </button>
             </form>
@@ -140,8 +140,8 @@ export const AdminScreen: React.FC<AdminScreenProps> = ({ onBack, onGoToMap }) =
         </div>
       )}
 
-      {/* Header Dinâmico - AGORA SEMPRE #007FF0 */}
-      <div className="bg-[#007FF0] text-white p-6 pt-12 pb-8 rounded-b-[2.5rem] shadow-xl transition-colors relative overflow-hidden">
+      {/* Header Dinâmico - AGORA SEMPRE #E63121 */}
+      <div className="bg-[#E63121] text-white p-6 pt-12 pb-8 rounded-b-[2.5rem] shadow-xl transition-colors relative overflow-hidden">
         <div className="absolute top-0 right-0 w-32 h-32 bg-white/10 rounded-full blur-2xl -mr-10 -mt-10"></div>
 
         <div className="flex items-center justify-between mb-6 relative z-10">
@@ -204,10 +204,10 @@ export const AdminScreen: React.FC<AdminScreenProps> = ({ onBack, onGoToMap }) =
               {/* BOTÃO INICIAR TURNO (PARA MOTORISTAS) */}
               <button
                 onClick={onGoToMap}
-                className="col-span-2 bg-white text-[#007FF0] p-4 rounded-2xl font-bold shadow-lg flex items-center justify-between hover:bg-gray-50 transition-all active:scale-[0.98] group"
+                className="col-span-2 bg-white text-[#E63121] p-4 rounded-2xl font-bold shadow-lg flex items-center justify-between hover:bg-gray-50 transition-all active:scale-[0.98] group"
               >
                 <div className="flex items-center gap-3">
-                  <div className="bg-[#007FF0]/10 p-2 rounded-full group-hover:bg-[#007FF0]/20 transition-colors">
+                  <div className="bg-[#E63121]/10 p-2 rounded-full group-hover:bg-[#E63121]/20 transition-colors">
                     <Car className="w-6 h-6" />
                   </div>
                   <div className="text-left">
@@ -228,11 +228,11 @@ export const AdminScreen: React.FC<AdminScreenProps> = ({ onBack, onGoToMap }) =
         {isAdmin && (
           <div className="mb-6 flex-1 flex flex-col min-h-0">
             <div className="flex justify-between items-center mb-3">
-              <h2 className="font-bold text-[#007FF0] text-sm uppercase tracking-wide">Base de Usuários</h2>
+              <h2 className="font-bold text-[#E63121] text-sm uppercase tracking-wide">Base de Usuários</h2>
               <div className="flex gap-2">
                 <button
                   onClick={() => setShowDriverForm(true)}
-                  className="flex items-center gap-1.5 text-[10px] font-bold bg-[#007FF0] text-white px-3 py-1.5 rounded-lg hover:bg-[#0066CC] transition-colors shadow-sm"
+                  className="flex items-center gap-1.5 text-[10px] font-bold bg-[#E63121] text-white px-3 py-1.5 rounded-lg hover:bg-[#0066CC] transition-colors shadow-sm"
                 >
                   <UserPlus className="w-3 h-3" /> Novo Motorista
                 </button>
@@ -256,14 +256,14 @@ export const AdminScreen: React.FC<AdminScreenProps> = ({ onBack, onGoToMap }) =
                   </thead>
                   <tbody className="divide-y divide-gray-50">
                     {users.slice().reverse().map((user) => (
-                      <tr key={user.id} className="hover:bg-[#007FF0]/5 transition-colors">
+                      <tr key={user.id} className="hover:bg-[#E63121]/5 transition-colors">
                         <td className="p-3">
                           <div className="font-bold text-xs text-gray-900">{user.name}</div>
                           <div className="text-[10px] text-gray-400">{user.email || user.phone}</div>
                         </td>
                         <td className="p-3 text-right">
                           <span className={`text-[9px] px-2 py-0.5 rounded-full font-bold uppercase border ${user.role === 'admin' ? 'bg-purple-100 text-purple-700 border-purple-200' :
-                            user.role === 'driver' ? 'bg-[#007FF0]/10 text-[#007FF0] border-[#007FF0]/20' :
+                            user.role === 'driver' ? 'bg-[#E63121]/10 text-[#E63121] border-[#E63121]/20' :
                               'bg-gray-100 text-gray-500 border-gray-200'
                             }`}>
                             {user.role === 'driver' ? 'Motorista' : user.role === 'admin' ? 'Admin' : 'Passageiro'}
@@ -281,7 +281,7 @@ export const AdminScreen: React.FC<AdminScreenProps> = ({ onBack, onGoToMap }) =
         {/* --- COMMON SECTION: DRIVER FEEDBACK --- */}
         <div className="flex-1 flex flex-col min-h-0">
           <div className="flex justify-between items-center mb-3">
-            <h2 className="font-bold text-[#007FF0] text-sm uppercase tracking-wide">
+            <h2 className="font-bold text-[#E63121] text-sm uppercase tracking-wide">
               {isAdmin ? 'Todos os Feedbacks' : 'Avaliações Recebidas'}
             </h2>
           </div>
@@ -295,7 +295,7 @@ export const AdminScreen: React.FC<AdminScreenProps> = ({ onBack, onGoToMap }) =
             ) : (
               <div className="space-y-2">
                 {driverFeedbacks.slice().reverse().map((feedback, idx) => (
-                  <div key={feedback.id || idx} className="p-3 rounded-xl bg-gray-50 hover:bg-white hover:shadow-sm border border-transparent hover:border-[#007FF0]/20 transition-all">
+                  <div key={feedback.id || idx} className="p-3 rounded-xl bg-gray-50 hover:bg-white hover:shadow-sm border border-transparent hover:border-[#E63121]/20 transition-all">
                     <div className="flex justify-between items-start mb-1.5">
                       <div className="flex gap-0.5">
                         {[...Array(5)].map((_, i) => (

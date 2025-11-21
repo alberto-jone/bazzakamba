@@ -42,7 +42,7 @@ export const SummaryScreen: React.FC<SummaryScreenProps> = ({ selectedRide, rati
   return (
     <div className="h-full w-full bg-gray-50 flex flex-col">
       {/* Header */}
-      <div className="bg-[#007FF0] text-white p-6 pt-12 pb-6 rounded-b-3xl shadow-xl">
+      <div className="bg-[#E63121] text-white p-6 pt-12 pb-6 rounded-b-3xl shadow-xl">
          <div className="flex items-center gap-2 mb-2">
              <div className="p-1 bg-white/20 rounded-md backdrop-blur-sm">
                  <ArrowRight className="w-3 h-3 text-white" />
@@ -58,10 +58,10 @@ export const SummaryScreen: React.FC<SummaryScreenProps> = ({ selectedRide, rati
              <div className="flex justify-between items-end border-b border-gray-100 pb-4">
                  <div>
                      <p className="text-xs text-gray-500 uppercase font-bold tracking-wider">Valor Final</p>
-                     <p className="text-3xl font-bold text-[#007FF0]">Kz {selectedRide.price.toLocaleString('pt-AO')}</p>
+                     <p className="text-3xl font-bold text-[#E63121]">Kz {selectedRide.price.toLocaleString('pt-AO')}</p>
                  </div>
                  <div className="text-right">
-                     <span className="bg-[#007FF0]/10 text-[#007FF0] text-xs font-bold px-2 py-1 rounded border border-[#007FF0]/20">
+                     <span className="bg-[#E63121]/10 text-[#E63121] text-xs font-bold px-2 py-1 rounded border border-[#E63121]/20">
                         {selectedRide.name}
                      </span>
                  </div>
@@ -70,7 +70,7 @@ export const SummaryScreen: React.FC<SummaryScreenProps> = ({ selectedRide, rati
              <div className="space-y-3 text-sm">
                 <div className="flex gap-3">
                     <div className="flex flex-col items-center">
-                        <div className="w-2 h-2 bg-[#007FF0] rounded-full"></div>
+                        <div className="w-2 h-2 bg-[#E63121] rounded-full"></div>
                         <div className="w-0.5 h-full bg-gray-200 my-1"></div>
                         {/* Changed destination dot from Green to Red to match map pin */}
                         <div className="w-2 h-2 bg-red-500 rounded-full"></div>
@@ -114,12 +114,12 @@ export const SummaryScreen: React.FC<SummaryScreenProps> = ({ selectedRide, rati
                         value={feedback}
                         onChange={(e) => setFeedback(e.target.value)}
                         placeholder="Escreva algo sobre a viagem..." 
-                        className="w-full bg-white rounded-xl p-4 h-24 border border-gray-200 text-sm text-gray-900 focus:ring-2 focus:ring-[#007FF0] focus:outline-none resize-none placeholder-gray-400"
+                        className="w-full bg-white rounded-xl p-4 h-24 border border-gray-200 text-sm text-gray-900 focus:ring-2 focus:ring-[#E63121] focus:outline-none resize-none placeholder-gray-400"
                     ></textarea>
                     <button 
                         onClick={handleSubmitFeedback}
                         disabled={isAnalyzing || !feedback}
-                        className="absolute bottom-3 right-3 bg-[#007FF0] hover:bg-[#0066CC] text-white p-2 rounded-lg disabled:opacity-50 hover:scale-105 transition-transform"
+                        className="absolute bottom-3 right-3 bg-[#E63121] hover:bg-[#0066CC] text-white p-2 rounded-lg disabled:opacity-50 hover:scale-105 transition-transform"
                     >
                         {isAnalyzing ? <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-white"></div> : <Send className="w-4 h-4" />}
                     </button>
@@ -155,7 +155,7 @@ export const SummaryScreen: React.FC<SummaryScreenProps> = ({ selectedRide, rati
       <div className="p-6 bg-white border-t border-gray-100 space-y-3">
           <button 
              onClick={onHome}
-             className="w-full bg-[#007FF0] hover:bg-[#0066CC] text-white font-bold py-4 rounded-xl shadow-lg active:scale-[0.98] transition-transform flex items-center justify-center gap-2"
+             className="w-full bg-[#E63121] hover:bg-[#0066CC] text-white font-bold py-4 rounded-xl shadow-lg active:scale-[0.98] transition-transform flex items-center justify-center gap-2"
           >
              <RefreshCw className="w-4 h-4" /> Nova Corrida
           </button>
