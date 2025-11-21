@@ -46,7 +46,7 @@ export const RIDE_OPTIONS: RideOption[] = [
 export const MOCK_DRIVER: Driver = {
   name: 'Paulo Silva',
   rating: 4.9,
-  carModel: 'Toyota Corolla',
+  carModel: 'Yundai i20',
   carColor: 'Azul',
   plate: 'LD-22-44-GX',
   trips: 1240,
